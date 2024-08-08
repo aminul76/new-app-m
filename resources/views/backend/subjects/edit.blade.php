@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-    <h1>Edit Subject</h1>
+    <h1>Subject Item Edit Subject</h1>
     @if ($errors->any())
         <div>
             <ul>

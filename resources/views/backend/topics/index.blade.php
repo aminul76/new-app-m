@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-    <h1>Topics List</h1>
+    <h1>Subject Item Topics List</h1>
     <a href="{{ route('admin.topics.create') }}">Create New Topic</a>
     @if ($message = Session::get('success'))
         <p>{{ $message }}</p>

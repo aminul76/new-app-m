@@ -1,6 +1,6 @@
 @extends('backend.master')
 @section('content')
-    <h1>Years List</h1>
+    <h1>Subject Item Years List</h1>
     <a href="{{ route('admin.years.create') }}">Create New Year</a>
     @if ($message = Session::get('success'))
         <p>{{ $message }}</p>

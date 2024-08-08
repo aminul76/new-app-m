@@ -151,9 +151,9 @@ form {
     width:80%;
     margin: 0 auto;
     padding: 20px;
-   
-   
-    
+
+
+
 }
 
 label {
@@ -228,5 +228,56 @@ select:focus {
     border-color: #4CAF50;
     outline: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4" viewBox="0 0 292.4 292.4"><path fill="%234CAF50" d="M287 69.9L163.2 192.9c-3.9 3.9-10.2 3.9-14.1 0L5.3 69.9c-3.9-3.9-3.9-10.2 0-14.1l14.1-14.1c3.9-3.9 10.2-3.9 14.1 0l123.5 123.5 123.5-123.5c3.9-3.9 10.2-3.9 14.1 0l14.1 14.1c4 3.9 4 10.2.1 14.1z"/></svg>');
+}
+/* submenu */
+/* Submenu */
+.submenu {
+    display: none;  /* Hide submenu by default */
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.submenu li {
+    padding: 5px 0;
+}
+
+.submenu li a {
+    font-size: 14px;
+    color: #bdc3c7;
+}
+
+/* Show Submenu on Hover */
+.sidebar ul li:hover > .submenu {
+    display: block;  /* Show submenu on hover */
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    resize: vertical; /* Allows the user to resize the textarea vertically */
+    min-height: 100px; /* Sets a minimum height for the textarea */
+}
+
+textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Adds a subtle shadow when focused */
+}
+
+textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+textarea[required] {
+    border-left: 5px solid #ff0000; /* Adds a red border to indicate that the field is required */
 }
 

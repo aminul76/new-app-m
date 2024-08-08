@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <h1>Exams List</h1>
+    <h1>Subject Item Exams List</h1>
     <a href="{{ route('admin.exams.create') }}">Create New Exam</a>
     @if ($message = Session::get('success'))
         <p>{{ $message }}</p>

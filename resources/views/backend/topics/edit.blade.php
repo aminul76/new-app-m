@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('content')
-    <h1>Edit Topic</h1>
+    <h1>Subject Item Edit Topic</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -20,7 +20,7 @@
         <input type="text" name="t_slug" id="t_slug" value="{{ $topic->t_slug }}">
         <label for="t_title">Subject:</label>
         <select name="subject_id" id="subject_id">
-           
+
             @foreach($subjects as $subject)
                 <option value="{{ $subject->id }}" {{ $subject->id == $topic->subject_id ? 'selected' : '' }}>
                     {{ $subject->s_title }}

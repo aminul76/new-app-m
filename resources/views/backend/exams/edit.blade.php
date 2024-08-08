@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <h1>Edit Exam</h1>
+    <h1>Subject Item->Edit Exam</h1>
     @if ($errors->any())
         <div>
             <ul>

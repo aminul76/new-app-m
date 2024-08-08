@@ -1,8 +1,7 @@
 @extends('backend.master')
 
-
 @section('content')
-    <h1>Subject Item Create Year</h1>
+    <h1>Create Course</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -12,12 +11,12 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('admin.years.store') }}" method="POST">
+    <form action="{{ route('admin.courses.store') }}" method="POST">
         @csrf
-        <label for="y_title">Title:</label>
-        <input type="text" name="y_title" id="y_title">
-        <label for="y_slug">Slug:</label>
-        <input type="text" name="y_slug" id="y_slug">
+        <label for="c_title">Title:</label>
+        <input type="text" name="c_title" id="c_title">
+        <label for="c_slug">Slug:</label>
+        <input type="text" name="c_slug" id="c_slug">
         <button type="submit">Create</button>
     </form>
 @endsection

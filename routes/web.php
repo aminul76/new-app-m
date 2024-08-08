@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\YearController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TopicController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\OptionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,12 +42,14 @@ Route::group([
     'middleware' => ['auth', 'admin'],
 ], function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::resource('years', YearController::class);
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('exams', ExamController::class);
-
+    Route::resource('courses', CourseController::class);
+    Route::resource('questions', QuestionController::class);
+    Route::resource('options', OptionController::class);
 
 
 });
