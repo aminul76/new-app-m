@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('topic_id');
+            $table->string('q_title');
+            $table->string('q_slug');
+            $table->text('q_explain');
+            $table->timestamps();
+
+            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('topic_id')->references('id')->on('topics');
             $table->timestamps();
         });
     }

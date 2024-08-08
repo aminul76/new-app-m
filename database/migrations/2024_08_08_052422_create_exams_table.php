@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->string('e_title');
+            $table->string('e_slug');
             $table->timestamps();
         });
     }
