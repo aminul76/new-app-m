@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('topic_id')->references('id')->on('topics');
-            $table->timestamps();
+           
         });
     }
 

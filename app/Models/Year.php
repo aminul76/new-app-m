@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Year extends Model
 {
     use HasFactory;
-    protected $fillable = ['e_title', 'e_slug'];
+    protected $fillable = ['y_title', 'y_slug'];
 
     public function questions()
     {

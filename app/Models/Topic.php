@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $fillable = ['t_title', 't_slug'];
+    protected $fillable = ['subject_id','t_title', 't_slug'];
 
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+    
     public function questions()
     {
         return $this->hasMany(Question::class);
     }
+
+    
 }
