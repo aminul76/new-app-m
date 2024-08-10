@@ -1,3 +1,4 @@
+/* Reset and Box-Sizing */
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +6,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Body */
 body {
     display: flex;
     min-height: 100vh;
     background-color: #f4f4f4;
 }
 
+/* Sidebar */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -18,40 +21,87 @@ body {
     color: #ffffff;
     padding: 20px;
     position: fixed;
+    transition: width 0.3s; /* Smooth transition for width changes */
 }
 
+/* Logo */
 .sidebar .logo h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 24px; /* Adjust font size as needed */
 }
 
+/* Navigation Menu */
 .sidebar ul {
     list-style: none;
+    padding: 0;
 }
 
 .sidebar ul li {
-    margin: 20px 0;
+    margin: 15px 0; /* Adjusted margin for better spacing */
+    position: relative; /* To position submenu correctly */
 }
 
+/* Menu Links */
 .sidebar ul li a {
     text-decoration: none;
     color: #ffffff;
     display: block;
     font-size: 18px;
-}
-
-.sidebar ul li a:hover {
-    background-color: #3742fa;
     padding: 10px;
     border-radius: 4px;
+    transition: background-color 0.3s, padding-left 0.3s; /* Smooth transitions */
 }
 
+/* Hover Effect for Menu Links */
+.sidebar ul li a:hover {
+    background-color: #3742fa;
+    padding-left: 20px; /* Add padding-left on hover for a sliding effect */
+}
+
+/* Submenu */
+.submenu {
+    display: none;  /* Hide submenu by default */
+    list-style-type: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.submenu li {
+    padding: 5px 0;
+}
+
+.submenu li a {
+    font-size: 14px;
+    color: #bdc3c7;
+    padding: 5px 0;
+}
+
+/* Show Submenu on Hover */
+.sidebar ul li:hover > .submenu {
+    display: block;  /* Show submenu on hover */
+}
+
+/* Optional: Show a slight shadow to highlight submenu items */
+.sidebar ul li:hover > .submenu li a {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px; /* Rounded corners for submenu items */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.sidebar ul li:hover > .submenu li a:hover {
+    background-color: #3742fa;
+    color: #ffffff;
+}
+
+/* Main Content */
 .main-content {
     margin-left: 250px;
     padding: 20px;
     width: calc(100% - 250px);
 }
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -62,6 +112,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* User Wrapper */
 .user-wrapper {
     display: flex;
     align-items: center;
@@ -72,6 +123,7 @@ body {
     margin-right: 10px;
 }
 
+/* Cards */
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -92,6 +144,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Recent Grid */
 .recent-grid {
     display: grid;
     grid-template-columns: 65% 35%;
@@ -99,6 +152,7 @@ body {
     margin-top: 20px;
 }
 
+/* Card */
 .card {
     background-color: #ffffff;
     padding: 20px;
@@ -117,6 +171,7 @@ body {
     overflow-x: auto;
 }
 
+/* Table */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -136,6 +191,7 @@ table tbody tr td {
     border-bottom: 1px solid #f4f4f4;
 }
 
+/* Customer */
 .customer {
     display: flex;
     align-items: center;
@@ -146,14 +202,12 @@ table tbody tr td {
     border-radius: 50%;
     margin-right: 10px;
 }
-/* form css */
+
+/* Form Styles */
 form {
-    width:80%;
+    width: 80%;
     margin: 0 auto;
     padding: 20px;
-
-
-
 }
 
 label {
@@ -186,7 +240,7 @@ button[type="submit"] {
     font-weight: bold;
 }
 
-td a{
+td a {
     width: 80px;
     padding: 10px;
     background-color: #4CAF50;
@@ -206,6 +260,7 @@ input[type="text"]:focus {
     border-color: #4CAF50;
     outline: none;
 }
+
 select {
     width: 100%;
     padding: 8px;
@@ -229,29 +284,8 @@ select:focus {
     outline: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="292.4" height="292.4" viewBox="0 0 292.4 292.4"><path fill="%234CAF50" d="M287 69.9L163.2 192.9c-3.9 3.9-10.2 3.9-14.1 0L5.3 69.9c-3.9-3.9-3.9-10.2 0-14.1l14.1-14.1c3.9-3.9 10.2-3.9 14.1 0l123.5 123.5 123.5-123.5c3.9-3.9 10.2-3.9 14.1 0l14.1 14.1c4 3.9 4 10.2.1 14.1z"/></svg>');
 }
-/* submenu */
-/* Submenu */
-.submenu {
-    display: none;  /* Hide submenu by default */
-    list-style-type: none;
-    padding-left: 20px;
-    margin-top: 10px;
-}
 
-.submenu li {
-    padding: 5px 0;
-}
-
-.submenu li a {
-    font-size: 14px;
-    color: #bdc3c7;
-}
-
-/* Show Submenu on Hover */
-.sidebar ul li:hover > .submenu {
-    display: block;  /* Show submenu on hover */
-}
-
+/* Textarea */
 textarea {
     width: 100%;
     padding: 10px;
@@ -281,3 +315,48 @@ textarea[required] {
     border-left: 5px solid #ff0000; /* Adds a red border to indicate that the field is required */
 }
 
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.file-input-label:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.file-input-label:active {
+    background-color: #003d7a;
+    border-color: #003d7a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar ul li a {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+}

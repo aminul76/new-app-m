@@ -15,9 +15,11 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\QuestionImortConroller;
 
 
 use App\Http\Controllers\ImportController;
+
 
 Route::get('import', [ImportController::class, 'index']);
 Route::post('import', [ImportController::class, 'import'])->name('import');
@@ -58,7 +60,7 @@ Route::group([
     'middleware' => ['auth', 'admin'],
 ], function () {
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-
+    //curd route
     Route::resource('years', YearController::class);
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
@@ -67,7 +69,9 @@ Route::group([
     Route::resource('questions', QuestionController::class);
     Route::resource('options', OptionController::class);
 
-
+    //import
+    Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
+    Route::post('year-exam-index', [QuestionImortConroller::class, 'YearExam'])->name('yearexam');
 });
 
 

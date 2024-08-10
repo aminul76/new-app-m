@@ -21,7 +21,9 @@
             <a href="">Question</a>
             <ul class="submenu">
                 <li><a href="{{ route('admin.questions.index') }}">Question</a></li>
+                <li><a href="{{ route('admin.yearexam.index') }}">Question Exam Year</a></li>
                 <li><a href="{{ route('admin.options.index') }}">Option</a></li>
+
             </ul>
         </li>
 

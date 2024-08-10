@@ -6,21 +6,21 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{{ asset('backend/styles.css') }}">
      <!-- jQuery -->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="{{ asset('plugins/jquery-3.6.0.min.js') }}"></script>
      <!-- DataTables CSS -->
-     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
+     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/jquery.dataTables.min.css') }}"/>
      <!-- DataTables JS -->
-     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+     <script type="text/javascript" charset="utf8" src="{{ asset('plugins/jquery.dataTables.min.js') }}"></script>
 </head>
 <body>
     @include('backend.include.sidebar')
     <div class="main-content">
        @include('backend.include.header')
-    
-       
+
+
         @yield('content')
     </div>
-  
+
 
   <script>
     $(document).ready(function() {
