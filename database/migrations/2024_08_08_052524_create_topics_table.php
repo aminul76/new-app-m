@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('t_title');
             $table->string('t_slug');
             $table->timestamps();
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
     }
 

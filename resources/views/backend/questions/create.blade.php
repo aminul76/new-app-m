@@ -14,6 +14,9 @@
             @endforeach
         </select>
 
+
+
+
         <label for="topic_id">Topic:</label>
         <select name="topic_id" id="topic_id" required>
             <option value="">Select a Topic</option>
@@ -21,6 +24,26 @@
                 <option value="{{ $topic->id }}">{{ $topic->t_title }}</option>
             @endforeach
         </select>
+
+
+
+        <label for="years">Select Years:</label>
+        <select name="years[]" id="years" multiple>
+            @foreach($years as $year)
+                <option value="{{ $year->id }}">{{ $year->y_title }}</option>
+            @endforeach
+        </select>
+
+
+
+
+        <label for="exams">Select Exam:</label>
+        <select name="exams[]" id="exams" multiple>
+            @foreach($exams as $exam)
+                <option value="{{ $exam->id }}">{{ $exam->e_title }}</option>
+            @endforeach
+        </select>
+
 
         <label for="q_title">Title:</label>
         <input type="text" name="q_title" id="q_title" required>

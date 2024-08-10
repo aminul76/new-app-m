@@ -16,6 +16,22 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
 
+
+use App\Http\Controllers\ImportController;
+
+Route::get('import', [ImportController::class, 'index']);
+Route::post('import', [ImportController::class, 'import'])->name('import');
+Route::get('export', [ImportController::class, 'export'])->name('export');
+
+Route::get('import', function () {
+    return view('import');
+});
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });

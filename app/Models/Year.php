@@ -14,7 +14,7 @@ class Year extends Model
     {
         return $this->belongsToMany(Question::class, 'question_years');
     }
-
+ 
     public function examQuestionYears()
     {
         return $this->hasMany(ExamQuestionYear::class);

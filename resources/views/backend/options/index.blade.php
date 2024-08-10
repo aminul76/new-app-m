@@ -22,7 +22,7 @@
                     <td>{{ $option->id }}</td>
                     <td>{{ $option->question->q_title }}</td>
                     <td>{{ $option->p_title }}</td>
-                    <td>{{ $option->is_correct ? 'Yes' : 'No' }}</td>
+                    <td>{{ $option->is_correct == 1 ? 'Yes' : 'No' }}</td>
                     <td>
                         <a href="{{ route('admin.options.edit', $option->id) }}">Edit</a>
                         <form action="{{ route('admin.options.destroy', $option->id) }}" method="POST" style="display:inline;">

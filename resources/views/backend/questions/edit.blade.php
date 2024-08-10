@@ -27,6 +27,32 @@
             @endforeach
         </select>
 
+        <label for="years">Select Years:</label>
+        <select name="years[]" id="years" multiple>
+            @foreach($years as $year)
+                <option value="{{ $year->id }}"
+                    @if(in_array($year->id, $question->years->pluck('id')->toArray()))
+                        selected
+                    @endif>
+                    {{ $year->y_title }}
+                </option>
+            @endforeach
+        </select>
+
+
+        <label for="exams">Select exams:</label>
+        <select name="exams[]" id="exams" multiple>
+            @foreach($exams as $exam)
+                <option value="{{ $exam->id }}"
+                    @if(in_array($exam->id, $question->exams->pluck('id')->toArray()))
+                        selected
+                    @endif>
+                    {{ $exam->e_title }}
+                </option>
+            @endforeach
+        </select>
+
+
         <label for="q_title">Title:</label>
         <input type="text" name="q_title" id="q_title" value="{{ $question->q_title }}" required>
 
