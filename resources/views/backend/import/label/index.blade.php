@@ -1,0 +1,36 @@
+@extends('backend.master')
+
+@section('content')
+    <h1>labels List</h1>
+
+    @if ($message = Session::get('success'))
+        <p>{{ $message }}</p>
+    @endif
+    <table id="dTable" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($labels as $label)
+                <tr>
+                    <td>{{ $label->id }}</td>
+                    <td>{{ $label->i_title }}</td>
+                    <td>{{ $label->i_slug }}</td>
+                    <td>
+                        <a href="{{ route('admin.label.subject', $label->id) }}">Edit</a>
+                        <form action="{{ route('admin.import-label.destroy', $label->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endsection

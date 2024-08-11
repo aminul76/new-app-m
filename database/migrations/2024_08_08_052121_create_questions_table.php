@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('subject_id')->nullable();
             $table->unsignedBigInteger('topic_id')->nullable();
-            $table->string('q_title');
+            $table->unsignedBigInteger('import_id')->nullable();
+            $table->string('q_title')->nullable();
             $table->string('q_slug')->nullable();
             $table->text('q_explain')->nullable();
             $table->timestamps();
-
+            $table->foreign('import_id')->references('id')->on('imports')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
 

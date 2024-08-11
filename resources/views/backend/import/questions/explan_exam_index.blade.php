@@ -2,15 +2,20 @@
 
 @section('content')
     <h1>Import/Export Questions</h1>
-    <p>প্রথাম কলামে কোন হেডিং থাকবে না প্রশ্ন থাকবে১,৬,১১ অপশন থাকবে২,৩,৪,৫ দ্বিতীয় কলামে উপত্তর থাবে যে অপশনে উত্তর হবে তা
-        ১ দিতে হবে উদাহরন <a target="_blank" href="https://docs.google.com/spreadsheets/d/1sIlH6yOAG16D5aIAhaOhSsYKASF0DI2k97bC8l9LNic/edit?usp=sharing">example</a>
+    <p>প্রথাম কলামে কোন হেডিং থাকবে না প্রশ্ন থাকবে১,৭,১৩ অপশন থাকবে২,৩,৪,৫, ৬নং ডিসক্রিপশন দ্বিতীয় কলামে উপত্তর থাবে যে অপশনে উত্তর হবে তা
+        ১ দিতে হবে উদাহরন
+
+
+
+
+        <a target="_blank" href="https://docs.google.com/spreadsheets/d/1hmg7KdnnXXkWe8PugmmYSQdBLhWEZY5Nyl6f-2VdWU8/edit?usp=sharing">example</a>
     <p>
         @if (session('success'))
             <p>{{ session('success') }}</p>
         @endif
 
         <!-- Import Form -->
-    <form action="{{ route('admin.yearexam') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.explan.exam') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
 

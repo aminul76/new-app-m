@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    protected $fillable = ['subject_id', 'topic_id', 'q_title', 'q_slug', 'q_explain'];
+    protected $fillable = ['subject_id', 'topic_id', 'import_id','q_title', 'q_slug', 'q_explain'];
 
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function import()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
 
     public function topic()
     {

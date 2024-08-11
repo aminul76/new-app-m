@@ -22,6 +22,7 @@ body {
     padding: 20px;
     position: fixed;
     transition: width 0.3s; /* Smooth transition for width changes */
+    overflow-y: auto; /* Enables vertical scrolling */
 }
 
 /* Logo */
@@ -348,6 +349,24 @@ textarea[required] {
 .file-input-label:active {
     background-color: #003d7a;
     border-color: #003d7a;
+}
+.question {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.options {
+    list-style: none;
+    padding-left: 0;
+}
+
+.options li {
+    margin-bottom: 5px;
+}
+
+label input[type="radio"] {
+    margin-right: 10px;
 }
 
 /* Responsive Design */

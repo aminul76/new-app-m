@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\QuestionImortConroller;
+use App\Http\Controllers\Admin\ImportLabalController;
 
 
 use App\Http\Controllers\ImportController;
@@ -72,6 +73,21 @@ Route::group([
     //import
     Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
     Route::post('year-exam-index', [QuestionImortConroller::class, 'YearExam'])->name('yearexam');
+
+    Route::get('explan-exam-index', [QuestionImortConroller::class, 'explanExamIndex'])->name('explan.index');
+    Route::post('explan-exam-index', [QuestionImortConroller::class, 'explanExam'])->name('explan.exam');
+
+    //import label
+    Route::get('import-label-index', [ImportLabalController::class, 'LabelIndex'])->name('label.index');
+    Route::delete('import-label/{id}', [ImportLabalController::class, 'labeldestroy'])
+    ->name('import-label.destroy');
+    Route::get('import-label-subject/{id}', [ImportLabalController::class, 'LabelSubject'])->name('label.subject');
+
+    Route::post('import-label-subject', [ImportLabalController::class, 'LabelSubjectTopic'])->name('label.subject.topic');
+
+    Route::post('/questions/update-topics', [ImportLabalController::class, 'storeTopics'])->name('updateTopics');
+
+
 });
 
 
