@@ -33,11 +33,14 @@
                                 <select name="topics[{{ $questionId }}]" required>
                                     <option value="">Select a topic</option>
                                     @foreach ($topics as $topic)
-
-                                        <option value="{{ $topic->id }}">{{ $topic->t_title }}</option>
+                                        <option value="{{ $topic->id }}"
+                                            {{ old("topics.$questionId") == $topic->id ? 'selected' : '' }}>
+                                            {{ $topic->t_title }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </td>
+
                         </tr>
                         @foreach($groupedOptions->slice(1) as $option)
                             <tr>

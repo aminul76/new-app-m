@@ -29,6 +29,19 @@
             </ul>
         </li>
 
+
+        <li>
+            <a href="">Model Test Generate</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.model_tests.index') }}">Model test</a></li>
+                <li><a href="#">Generate Question</a></li>
+                <li><a href="{{ route('admin.explan.index') }}">Import Q Explan </a></li>
+                <li><a href="{{ route('admin.label.index') }}">Import Lebal Topic</a></li>
+                <li><a href="{{ route('admin.options.index') }}">Option</a></li>
+
+            </ul>
+        </li>
+
         <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li>
 

@@ -17,9 +17,13 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\QuestionImortConroller;
 use App\Http\Controllers\Admin\ImportLabalController;
+use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\ModelTestController;
 
 
 use App\Http\Controllers\ImportController;
+
+
 
 
 Route::get('import', [ImportController::class, 'index']);
@@ -70,6 +74,9 @@ Route::group([
     Route::resource('questions', QuestionController::class);
     Route::resource('options', OptionController::class);
 
+    Route::resource('model_tests', ModelTestController::class);
+
+
     //import
     Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
     Route::post('year-exam-index', [QuestionImortConroller::class, 'YearExam'])->name('yearexam');
@@ -86,6 +93,13 @@ Route::group([
     Route::post('import-label-subject', [ImportLabalController::class, 'LabelSubjectTopic'])->name('label.subject.topic');
 
     Route::post('/questions/update-topics', [ImportLabalController::class, 'storeTopics'])->name('updateTopics');
+
+    //model test add question
+    Route::get('/model-test/{id}/add-questions', [ModelTestController::class, 'showAddQuestionsForm'])->name('model-test.add-questions.form');
+    Route::post('/model-test/{id}/add-questions', [ModelTestController::class, 'addQuestions'])->name('model-test.add-questions');
+    // Additional Routes for AJAX Requests
+    Route::get('/get-topics/{subjectId}', [AjaxController::class, 'getTopics'])->name('getTopics');
+    Route::get('/get-questions/{topicId}', [AjaxController::class, 'getQuestions'])->name('get-questions');
 
 
 });

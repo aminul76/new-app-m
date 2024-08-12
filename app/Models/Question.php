@@ -10,16 +10,25 @@ class Question extends Model
     use HasFactory;
     protected $fillable = ['subject_id', 'topic_id', 'import_id','q_title', 'q_slug', 'q_explain'];
 
+
+
+    public function import()
+    {
+        // Update this to the correct model if it's not `Subject`
+        return $this->belongsTo(ImportModel::class, 'import_id');
+    }
+
+
+
+    // public function import()
+    // {
+    //     return $this->belongsTo(Subject::class);
+    // }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
-
-    public function import()
-    {
-        return $this->belongsTo(Subject::class);
-    }
-
 
     public function topic()
     {
@@ -50,5 +59,9 @@ class Question extends Model
     public function examQuestionYears()
     {
         return $this->hasMany(ExamQuestionYear::class);
+    }
+    public function modelTestQuestions()
+    {
+        return $this->hasMany(ModelTestQuestion::class);
     }
 }
