@@ -17,8 +17,12 @@ class AjaxController extends Controller
 
     public function getQuestions($topicId)
     {
-        $questions = Question::where('topic_id', $topicId)->get();
+        $questions = Question::where('topic_id', $topicId)
+        ->with('exams') // Eager load the exams relationship
+        ->get();
         return response()->json(['questions' => $questions]);
     }
+
+   
 
 }

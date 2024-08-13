@@ -1,0 +1,102 @@
+.icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Adjust the size and alignment as needed */
+}
+
+.icon-image {
+    width: 24px;  /* Set your desired width */
+    height: 24px; /* Set your desired height */
+    /* You can adjust these values to fit your needs */
+}
+
+
+
+.course-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Reduced gap for very small screens */
+
+
+}
+
+
+.course-card {
+    width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: white;
+
+}
+
+.running {
+    background-image: linear-gradient(to bottom right, #04128a, #2701ff); /* Red gradient */
+}
+
+.crash-course {
+    background-image: linear-gradient(to bottom right, #026e06, #396902); /* Green gradient */
+}
+
+.revision {
+    background-image: linear-gradient(to bottom right, #1e88e5, #013158); /* Blue gradient */
+}
+
+.vocabulary {
+    background-image: linear-gradient(to bottom right, #580351, #9c013c); /* Orange gradient */
+}
+
+.course-card h3 {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.course-card img {
+    margin-top: 10px;
+    width: 90px;
+    height: 100px;
+}
+
+/* Media Query for screens 300px and wider */
+@media (max-width: 300px) {
+    .course-card {
+        width: calc(50% - 10px); /* Two cards per row with 10px gap */
+        margin-bottom: 10px; /* Reduced margin between rows */
+    }
+    .course-card {
+        width: 120px;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+}
+
+/* Media Query for screens 300px and wider */
+@media (max-width: 600px) {
+    .course-card {
+        width: calc(50% - 10px); /* Two cards per row with 10px gap */
+        margin-bottom: 10px; /* Reduced margin between rows */
+    }
+    .course-card {
+        width: 120px;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+}

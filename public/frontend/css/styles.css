@@ -1,0 +1,673 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    color: white;
+    padding: 1em;
+    z-index: 1000; /* Ensure header is above other content */
+    position: relative; /* Necessary to ensure z-index works */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    margin-left: 16px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.sign-in-btn {
+    background: linear-gradient(135deg, #012a3f, #860436); /* Warm Blue to Warm Purple */
+
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 8px; /* Adjust the value as needed */
+}
+
+.sign-in-btn i {
+    margin-right: 4px;
+}
+
+.sign-in-btn:hover {
+    background-color: #777;
+}
+
+nav#sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    color: white;
+    transition: left 0.3s;
+    z-index: 1000; /* Ensure sidebar is above other content */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    color: white;
+}
+
+
+.sidebar-logo {
+    font-size: 24px;
+}
+
+.close-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+nav#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav#sidebar ul li {
+    padding: 16px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+nav#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+nav#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+main {
+    padding: 32px;
+    padding-bottom: 80px; /* Padding for footer space */
+}
+
+/* Title Card */
+.title-card {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center-align text in title card */
+    position: relative; /* Ensure z-index positioning works */
+    z-index: 1; /* Ensure title card appears above content but below the sidebar */
+    color: #fff; /* Ensure text is visible on gradient background */
+}
+
+
+/* Category Cards */
+.category-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Category Card */
+/* Category Card */
+.category-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    text-decoration: none; /* Remove underline from links */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(25% - 20px); /* Default to 4 cards per row */
+    max-width: calc(25% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative; /* Ensure live-text positioning works */
+}
+
+.card-icon {
+    font-size: 32px;
+    color: transparent; /* Hide default color */
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    -webkit-background-clip: text; /* Clip the gradient to the text */
+    background-clip: text; /* Clip the gradient to the text */
+    display: inline-block; /* Ensure the background clip works correctly */
+
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+}
+
+
+.live-text {
+    position: absolute;
+    top: -5px; /* Distance from the top */
+    right: -10px; /* Distance from the right */
+    background-color: #ff0000; /* Red background for live effect */
+    color: white;
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 8px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    opacity: 1;
+}
+
+/* Pulsing effect */
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .category-card {
+        flex: 1 1 calc(33.333% - 20px); /* 3 cards per row */
+        max-width: calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .category-card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+        max-width: calc(50% - 20px);
+    }
+    .card-icon {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+        max-width: calc(50% - 20px);
+    }
+    .card-icon {
+        font-size: 20px;
+    }
+    .card-title {
+        font-size: 16px;
+      
+    }
+    main {
+        padding-bottom: 40px; /* Padding for small screens */
+    }
+}
+
+/* Subject Icons Section */
+/* Subject Icons Section */
+.subject-icons-section {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.subject-icon-card {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    margin: 10px; /* Add margin to space out cards */
+    width: calc(33.333% - 20px); /* Default to 3 cards per row with spacing */
+    box-sizing: border-box;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.subject-icon-card:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+.subject-icon-card i:first-of-type {
+    font-size: 24px;
+    color: #007bff;
+    margin-right: 10px;
+}
+
+.subject-icon-card p {
+    flex: 1;
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.subject-icon-card i:last-of-type {
+    font-size: 20px;
+    color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .subject-icon-card {
+        width: calc(50% - 20px); /* Adjust to 2 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .subject-icon-card {
+        width: calc(100% - 20px); /* Adjust to 1 card per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .subject-icons-section {
+        flex-direction: column; /* Stack cards vertically */
+        align-items: center; /* Center cards */
+    }
+
+    .subject-icon-card {
+        width: 100%; /* Full width for very small screens */
+        margin-bottom: 10px; /* Space between stacked cards */
+    }
+
+    .subject-icon-card i:first-of-type {
+        font-size: 20px; /* Adjust icon size */
+    }
+
+    .subject-icon-card p {
+        font-size: 14px; /* Adjust text size */
+    }
+
+    .subject-icon-card i:last-of-type {
+        font-size: 18px; /* Adjust chevron size */
+    }
+}
+
+
+
+
+/* Promotion Card */
+.promotion-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.promotion-card:hover {
+    transform: scale(1.01);
+}
+
+.promotion-content {
+    margin-bottom: 20px;
+}
+
+.promotion-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.promotion-description {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+.promotion-button {
+    margin-top: auto;
+}
+
+.promotion-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.promotion-btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Other CSS styles */
+
+
+
+
+
+
+/* Subscription Section */
+.subscription-section {
+    position: fixed;
+    bottom: 0; /* Adjust based on footer height */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box; /* Ensure padding and border are included in element's width and height */
+}
+
+.subscription-title {
+    font-size: 20px;
+    margin: 0;
+    padding-right: 10px; /* Add some padding to the right for spacing */
+}
+
+.subscription-b-btn {
+    font-size: 16px;
+    padding: 10px 20px; /* Ensure sufficient padding for the button */
+    background-color: green;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; /* Push the button to the far right */
+}
+
+.subscription-b-btn:hover {
+    background-color: rgb(7, 38, 211);
+}
+
+
+/* Blog Post Cards Container */
+.blog-posts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+    justify-content: center;
+}
+
+/* Blog Post Card */
+.blog-post-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s;
+}
+
+.blog-post-card:hover {
+    transform: scale(1.01);
+}
+
+.blog-post-image {
+    width: 100%;
+    height: auto;
+}
+
+.blog-post-content {
+    padding: 15px;
+}
+
+.blog-post-title {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+}
+
+.blog-post-snippet {
+    font-size: 1em;
+    color: #555;
+    margin: 0 0 15px;
+}
+
+.read-more-link {
+    display: inline-block;
+    font-size: 1em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .blog-post-card {
+        flex: 1 1 calc(33.333% - 20px); /* 3 cards per row */
+        max-width: calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-post-card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-post-card {
+        flex: 1 1 100%; /* 1 card per row */
+        max-width: 100%;
+    }
+}
+
+
+
+
+/* Social Media Cards */
+.social-media-cards {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure cards wrap in small screens */
+    gap: 20px; /* Space between cards */
+    margin: 20px;
+}
+
+.social-media-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: calc(50% - 20px); /* 2 cards per row */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.social-media-card:hover {
+    transform: scale(1.01);
+}
+
+.social-media-icon {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.social-media-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.social-media-description {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 20px;
+}
+
+.social-media-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.social-media-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Facebook Card */
+.facebook-card .social-media-icon {
+    color: #3b5998;
+}
+
+.facebook-card .social-media-btn {
+    background-color: #3b5998;
+}
+
+.facebook-card .social-media-btn:hover {
+    background-color: #2d4373;
+}
+
+/* WhatsApp Card */
+.whatsapp-card .social-media-icon {
+    color: #25d366;
+}
+
+.whatsapp-card .social-media-btn {
+    background-color: #25d366;
+}
+
+.whatsapp-card .social-media-btn:hover {
+    background-color: #1da851;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .social-media-card {
+        width: calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .social-media-card {
+        width: calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    z-index: 1000; /* Ensure footer is above other content */
+}
+
+.footer-icons {
+    display: none;
+}
+
+.footer-icons a {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    text-decoration: none; /* Remove underline from links */
+}
+
+.footer-text {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .footer-icons {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+        padding: 8px 0;
+    }
+    .subscription-section {
+        bottom: 40px; /* Adjust based on footer height */
+    }
+    body {
+        padding-bottom: 60px; /* Add padding at the bottom of the body to avoid content overlap with footer */
+    }
+}

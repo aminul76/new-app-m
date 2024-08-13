@@ -5,7 +5,12 @@
 <h1>Questions List</h1>
 
 <div class="container">
-    <h1>Questions and Options</h1>
+    <h1>
+        @if ($topicStatus==1)
+        <p>topic already add</p>
+    @else
+    <p>no topic add</p>
+    @endif</h1>
 
     @if($questions->isNotEmpty())
         <form action="{{ route('admin.updateTopics') }}" method="POST">

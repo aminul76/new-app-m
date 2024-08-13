@@ -69,6 +69,15 @@ class ImportLabalController extends Controller
                 $firstQuestionSubjectId = $firstQuestion->subject_id;
             }
 
+            $questiontopicstats=Question::where('import_id',$id)->first();
+
+             if($questiontopicstats->topic_id !=null){
+                $topicStatus=1;
+             }
+             else{
+                $topicStatus=0;
+             }
+
 
         $topics = DB::table('topics')->where('subject_id',$firstQuestionSubjectId)->get(); // Fetch topics for the dropdown
 
@@ -83,7 +92,7 @@ class ImportLabalController extends Controller
             //     ->groupBy('question_id');
 
 
-            return view('backend.import.label.subject', compact('subjects','id','questions','topics'));
+            return view('backend.import.label.subject', compact('subjects','id','questions','topics','topicStatus'));
         }
 
         public function LabelSubjectTopic(Request $request){

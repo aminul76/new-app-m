@@ -50,6 +50,8 @@ class Question extends Model
         return $this->belongsToMany(Exam::class, 'exam_questions');
     }
 
+   
+
     public function years()
     {
         return $this->belongsToMany(Year::class, 'question_years');

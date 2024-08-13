@@ -1,0 +1,129 @@
+  /* General Styles */
+  .container-mark-div {
+    margin: 0;
+    padding: 0;
+   
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.container-mark {
+   
+ 
+ 
+ 
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.header-mark {
+    text-align: center;
+   
+}
+.header-mark h1 {
+    margin: 0;
+    font-size: 1.2em;
+}
+.header-mark p {
+    margin: 5px 0;
+}
+.status-mark {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.status-mark div {
+   
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.status-success {
+    padding: 5px;
+    background-color: #c0d8f3;
+}
+.status-failed {
+    background-color: #fdecea;
+}
+.status-info {
+    padding: 5px;
+    background-color: #e4d3f1;
+}
+.marks-mark {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.marks-mark div {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    
+}
+.marks-failed {
+    background-color: #fdecea;
+}
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+.mark-sheet {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+.mark-sheet th, .mark-sheet td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+.mark-sheet th {
+    background-color: #f1f1f1;
+}
+.preparation-level {
+    text-align: center;
+   
+}
+.preparation-level div {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #ddd;
+}
+.preparation-poor {
+    background-color: #f8d7da;
+}
+.buttons-mark {
+    display: flex;
+    justify-content: space-around;
+}
+.buttons-mark a {
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+.button-view-answer {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+}
+.button-merit-list {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+@media (max-width: 600px) {
+  
+    .status-mark div, .marks-mark div, .buttons-mark a {
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+}

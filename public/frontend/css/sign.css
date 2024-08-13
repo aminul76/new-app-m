@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.sing-backround {
+    height: 100vh; /* Ensure the background covers the viewport height */
+    width: 100vw;  /* Ensure the background covers the viewport width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(233deg, #3a7bd5 60%, #00d2ff 40%);
+    /* border-top-left-radius: 250px;  */
+    /* Adjust radius as needed */
+    overflow: hidden; /* Ensures the gradient doesn't overflow outside the rounded corners */
+}
+
+.sing-backround h1{
+    color: #ffffff;
+}
+.form-container {
+   background: #f0f0f000;
+    padding: 3em;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+     /* Position relative to place the back button absolutely */
+    
+}
+
+.back-button {
+    position: absolute; /* Absolute positioning */
+    top: 1rem; /* Distance from the top */
+    left: 1rem; /* Distance from the left */
+    display: inline-flex; /* Aligns icon and text */
+    align-items: center; /* Centers items vertically */
+    padding: 0.75rem 1rem; /* Padding inside the button */
+    border: none; /* Remove default border */
+    border-radius: 15px; /* Rounded corners */
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.back-button i {
+    margin-right: 0.5rem; /* Space between icon and text */
+}
+
+.back-button:hover {
+    background-color: #f0f0f0; /* Background color on hover */
+}
+
+h1 {
+    margin-bottom: 1em;
+    color: #333;
+}
+
+input {
+    width: calc(100% - 1em);
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    width: calc(100% - 1em);
+    padding: 0.75em;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #2a5db0;
+}
+
+.google-signin {
+    margin-top: 1em;
+}
+
+.google-signin button {
+    background: linear-gradient(135deg, #970303, #570000);
+    border: none;
+}
+
+.google-signin button:hover {
+    background: linear-gradient(135deg, #970303, #570000);
+    background-color: #c1351d;
+}
+.register-link {
+    margin-top: 1.5em;
+}
+
+.register-link p {
+    color: #000000;
+    margin: 0;
+}
+
+.register-link a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    
+    
+}
+
+@media (max-width: 480px) {
+   
+}

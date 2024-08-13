@@ -20,28 +20,24 @@ use App\Http\Controllers\Admin\ImportLabalController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ModelTestController;
 
+use App\Http\Controllers\FrontendController;
 
 use App\Http\Controllers\ImportController;
 
 
+Route::get('/', [FrontendController::class, 'index']);
 
-
-Route::get('import', [ImportController::class, 'index']);
-Route::post('import', [ImportController::class, 'import'])->name('import');
-Route::get('export', [ImportController::class, 'export'])->name('export');
-
-Route::get('import', function () {
-    return view('import');
-});
+Route::get('/courses/{slug}', [FrontendController::class, 'courses'])->name('courses.index');
 
 
 
 
+// Route::get('import', [ImportController::class, 'index']);
+// Route::post('import', [ImportController::class, 'import'])->name('import');
+// Route::get('export', [ImportController::class, 'export'])->name('export');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 
 

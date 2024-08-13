@@ -29,6 +29,8 @@ class ModelTestController extends Controller
 
     public function store(Request $request)
     {
+
+
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:model_tests',
@@ -37,6 +39,7 @@ class ModelTestController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
+       
 
         ModelTest::create($request->all());
 
@@ -89,6 +92,7 @@ class ModelTestController extends Controller
 
         $questionCount = ModelTestQuestion::where('model_test_id', $modelTestId)->count();
 
+            //subjects question
         $results = DB::table('subjects')
         ->join('model_test_questions', 'subjects.id', '=', 'model_test_questions.subject_id')
         ->join('questions', 'model_test_questions.question_id', '=', 'questions.id')
@@ -97,8 +101,18 @@ class ModelTestController extends Controller
         ->groupBy('subjects.s_title')
         ->get();
 
+        $topicscouts = DB::table('topics')
+        ->join('model_test_questions', 'topics.id', '=', 'model_test_questions.topic_id')
+        ->join('questions', 'model_test_questions.question_id', '=', 'questions.id')
+        ->select('topics.t_title', DB::raw('COUNT(questions.id) as question_count'))
+        ->where('model_test_questions.model_test_id', $modelTestId) // Assuming model_test_id is an integer
+        ->groupBy('topics.t_title')
+        ->get();
 
-        return view('backend.model_tests.generate.add-questions', compact('modelTest', 'subjects','questionCount','results'));
+
+
+
+        return view('backend.model_tests.generate.add-questions', compact('modelTest', 'subjects','questionCount','results','topicscouts'));
     }
 
     /**

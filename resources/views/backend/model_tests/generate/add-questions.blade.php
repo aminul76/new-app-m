@@ -4,18 +4,28 @@
 <div class="container">
     <h2>Add Questions to Model Test: {{ $modelTest->title }}</h2>
     <p>Number of Questions: {{ $questionCount }}</p>
-    
-    <ul>
 
+    <ul>
+        <p>Subject</p>
         @foreach ($results as $result)
 
-              <p>  Subject:  {{$result->s_title }}  Question Count:  {{$result->question_count }} <br></p>
+              <p>    {{$result->s_title }}  Question Count:  {{$result->question_count }} <br></p>
 
 
 
         @endforeach
     </ul>
 
+
+    <ul>
+
+        <p>Topic</p>
+        @foreach ($topicscouts as $topicscout)
+
+              <p>   {{$topicscout->t_title }}  Question Count:  {{$topicscout->question_count }} <br></p>
+
+        @endforeach
+    </ul>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -52,7 +62,7 @@
 
         <div class="form-group">
             <label for="question_ids">Select Questions:</label>
-            <select name="question_ids[]" id="question_ids" class="form-control" multiple required>
+            <select name="question_ids[]" id="question_ids" class="form-control" multiple required size="25">
                 <!-- Questions will be loaded via JavaScript based on the selected topic -->
             </select>
             @error('question_ids')
@@ -91,8 +101,11 @@ document.getElementById('topic_id').addEventListener('change', function() {
             .then(data => {
                 var questionSelect = document.getElementById('question_ids');
                 questionSelect.innerHTML = '';
+
                 data.questions.forEach(function(question) {
-                    questionSelect.innerHTML += `<option value="${question.id}">${question.q_title}</option>`;
+                    // Create a string with question title and associated exam titles
+                    var examTitles = question.exams.map(exam => exam.e_title).join(', ');
+                    questionSelect.innerHTML += `<option value="${question.id}">${question.q_title} (Exams: ${examTitles})</option>`;
                 });
             });
     }

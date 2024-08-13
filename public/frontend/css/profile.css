@@ -1,0 +1,80 @@
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.profile {
+    display: flex;
+    align-items: center;
+}
+.profile-info h1 i {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #0580e4;
+}
+.profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.profile-info {
+    flex-grow: 1;
+}
+.profile-info h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.profile-info p {
+    margin: 5px 0;
+    color: gray;
+}
+.no-package {
+    color: red;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+}
+.stats {
+    margin-top: 20px;
+}
+.stats h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.stat-bar {
+    flex-grow: 1;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.stat-bar div {
+    height: 100%;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.stat-label {
+    font-weight: bold;
+}
+  /* General Styles */
+  .routine-card {
+background: #fff;
+border-radius: 8px;
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+padding: 20px;
+max-width: 100%;
+margin: 0 auto;
+}
