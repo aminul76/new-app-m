@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts.js" defer></script>
+    <style>
+        /* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #f1f1f1;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <div class="logo">LIVE EXAM</div>
+        </div>
+        <div class="header-right">
+            <a href="sign.html" class="sign-in-btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+        </div>
+    </header>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">LIVE EXAM</div>
+            <div class="close-icon" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
+        </div>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-calendar-day"></i> Live Exam</a></li>
+            <li><a href="routine.html"><i class="fas fa-clock"></i> Routine Exam</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Free Exam</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Result</a></li>
+
+        </ul>
+    </nav>
+    <main>
+
+        <div class="routine-card">
+
+            <div class="profile">
+                <div class="profile-info">
+                    <h1>Aminul Islam    <button id="openModalBtn"><i class="fas fa-edit"></i></button></h1>
+                   
+                    <p>ID: 362080 | aminulciu@gmail.com </i></p>
+                </div>
+            </div>
+        </div>
+        <div class="no-package">
+            কোন একটিভ প্যাকেজ নাই
+        </div>
+
+        <div class="routine-card">
+            <div class="stats">
+                <h2>পরিসংখ্যান (লাইভ এক্সাম)</h2>
+                <div class="stat">
+                    <span class="stat-label">মোট পরীক্ষা</span>
+                    <span>0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">উত্তীর্ণ</span>
+                    <span>0</span>
+                </div>
+                <h2>পরীক্ষার পরিসংখ্যান</h2>
+                <div class="stat">
+                    <span class="stat-label">মোট প্রশ্ন</span>
+                    <span>0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">সঠিক</span>
+                    <span>0 (0.0%)</span>
+                
+                </div>
+                <div class="stat">
+                  
+                    <div class="stat-bar">
+                        <div style="width: 20%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">ভুল</span>
+                    <span>0 (0.0%)</span>
+                    
+                </div>
+                <div class="stat">
+                   
+                    <div class="stat-bar">
+                        <div style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">অনুত্তরিত</span>
+                    <span>0 (0.0%)</span>
+                   
+                   
+                </div>
+                <div class="stat">
+                   
+                   
+                    <div class="stat-bar">
+                        <div style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+     
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Update Profile</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="text">Number:</label>
+            <input type="text" id="name" name="name" required>
+
+            
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</div>
+    </main>
+    <footer>
+        <div class="footer-icons">
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+                <span class="footer-text">Home</span>
+            </a>
+            <a href="routine.html">
+                <i class="fas fa-calendar-check"></i>
+                <span class="footer-text">Routine</span>
+            </a>
+            <a href="result.html">
+                <i class="fas fa-chart-line"></i>
+                <span class="footer-text">Results</span>
+            </a>
+            <a href="profile.html">
+                <i class="fas fa-user"></i>
+                <span class="footer-text">Profile</span>
+            </a>
+
+        </div>
+    </footer>
+
+<script>
+    document.getElementById('openModalBtn').addEventListener('click', function() {
+    document.getElementById('myModal').style.display = 'block';
+});
+
+document.querySelector('.close-btn').addEventListener('click', function() {
+    document.getElementById('myModal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target == document.getElementById('myModal')) {
+        document.getElementById('myModal').style.display = 'none';
+    }
+});
+
+</script>
+</body>
+
+</html>

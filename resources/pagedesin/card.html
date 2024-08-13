@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Cards</title>
+    
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.course-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Reduced gap for very small screens */
+    background-color: #f0f0f0;
+    padding: 10px; /* Adjusted padding */
+}
+
+.course-card {
+    width: 130px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: linear-gradient(to bottom right, #024e7a, #004381); /* Default gradient */
+}
+
+.running {
+    background-image: linear-gradient(to bottom right, #04128a, #2701ff); /* Red gradient */
+}
+
+.crash-course {
+    background-image: linear-gradient(to bottom right, #026e06, #396902); /* Green gradient */
+}
+
+.revision {
+    background-image: linear-gradient(to bottom right, #1e88e5, #013158); /* Blue gradient */
+}
+
+.vocabulary {
+    background-image: linear-gradient(to bottom right, #580351, #9c013c); /* Orange gradient */
+}
+
+.course-card h3 {
+    margin: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.course-card img {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+/* Media Query for screens 300px and wider */
+@media (max-width: 300px) {
+    .course-card {
+        width: calc(50% - 10px); /* Two cards per row with 10px gap */
+        margin-bottom: 10px; /* Reduced margin between rows */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="course-body">
+        <div class="course-card running">
+            <img src="image/bcs.png" alt="ABC Blocks">
+            <h3>ডেইলি মডেল টেস্ট (মার্কস: ৫০)</h3>
+            <p>সময়: ২০ মিনিট</p>
+            <img src="icon1.png" alt="Icon">
+        </div>
+
+        <div class="course-card crash-course">
+            <img src="image/ntrca.png" alt="ABC Blocks">
+            <h3>৪৬ বিসিএস ক্রাশ কোর্স</h3>
+            <p>চূড়ান্ত মডেল টেস্ট</p>
+        </div>
+
+        <div class="course-card revision">
+            <img src="image/primary.png" alt="ABC Blocks">
+            <h3>বিসিএস প্রস্তুতি রিভিশন</h3>
+            <p>[পুরাতনদের]</p>
+        </div>
+
+        <div class="course-card vocabulary">
+            <img src="image/bcs.png" alt="ABC Blocks">
+            <h3>ভোকাবুলারির প্রস্তুতি</h3>
+            
+        </div>
+    </div>
+</body>
+</html>
