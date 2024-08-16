@@ -15,9 +15,10 @@
 </head>
 
 <body>
-   @include('frontend.include.header')
+   
     @yield('content')
     @include('frontend.include.footer')
+    @yield('js')
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 @section('style')
 @endsection
 @section('content')
-
+@include('frontend.include.header')
 <main>
     <!-- Title Card -->
     <div class="title-card">
@@ -73,47 +73,19 @@
     <h4> Exam</h4>
     <div class="subject-icons-section">
 
-        <a href="#" class="subject-icon-card">
+
+        @forelse ($course->subjects as $subject)
+        <a href="{{ url('/courses/' . urlencode($course->c_slug) . '/' . urlencode($subject->s_slug)) }}" class="subject-icon-card">
             <i class="fas fa-book"></i>
-            <p>Bangla</p>
+            <p>{{ $subject->s_title }}</p>
             <i class="fas fa-chevron-right"></i>
         </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-globe"></i>
-            <p>English</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-calculator"></i>
-            <p>Math</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-flag"></i>
-            <p>Bangladesh</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-globe"></i>
-            <p>International</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-flask"></i>
-            <p>Science</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-desktop"></i>
-            <p>ICT</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a href="#" class="subject-icon-card">
-            <i class="fas fa-cubes"></i>
-            <p>other Subject</p>
-            <i class="fas fa-chevron-right"></i>
-        </a>
+    @empty
+        <p>No subjects available for this course.</p>
+    @endforelse
+
     </div>
+    {{-- <a href="{{ route('subject.show', $subject->id) }}" --}}
 
 
     <h4> Exam</h4>

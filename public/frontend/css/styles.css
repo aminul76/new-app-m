@@ -249,7 +249,7 @@ main {
     }
     .card-title {
         font-size: 16px;
-      
+
     }
     main {
         padding-bottom: 40px; /* Padding for small screens */
@@ -671,3 +671,42 @@ footer {
         padding-bottom: 60px; /* Add padding at the bottom of the body to avoid content overlap with footer */
     }
 }
+
+
+/* topic header */
+/* Topic Header Section */
+.topic-header {
+    display: flex;
+    align-items: center;
+    justify-content: start; /* Align the back button and title to the left */
+    padding: 10px 20px;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Topic Title */
+  .topic-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto; /* Center the title */
+    color: #333;
+  }
+
+  /* Back Button */
+  .back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Icons */
+  .back-button span {
+    color: #333;
+  }
+
+  /* Hover Effect for Back Button */
+  .back-button:hover span {
+    color: #007bff; /* Blue hover effect */
+  }

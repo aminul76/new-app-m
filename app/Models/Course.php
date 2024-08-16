@@ -15,5 +15,14 @@ class Course extends Model
     {
         return $this->belongsToMany(Question::class, 'course_questions');
     }
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+    public function topics()
+    {
+        return $this->belongsToMany(Topic::class, 'course_topics');
+    }
+
 
 }

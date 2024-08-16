@@ -18,4 +18,8 @@ class Subject extends Model
     {
         return $this->hasMany(Topic::class, 'subject_id');
     }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 }

@@ -22,5 +22,10 @@ class Topic extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
 
 }

@@ -10,7 +10,10 @@
             <a href="">Subject Item</a>
             <ul class="submenu">
                 <li><a href="{{ route('admin.subjects.index') }}">Subjects</a></li>
+                <li><a href="{{ route('admin.course-subject.index') }}">Course Subject</a></li>
+
                 <li><a href="{{ route('admin.topics.index') }}">Topics</a></li>
+                <li><a href="{{ route('admin.course-topic.index') }}">Course Topic</a></li>
                 <li><a href="{{ route('admin.exams.index') }}">Exam</a></li>
                 <li><a href="{{ route('admin.years.index') }}">Years</a></li>
 

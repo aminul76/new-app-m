@@ -4,7 +4,7 @@
         <div class="logo">LIVE EXAM</div>
     </div>
     <div class="header-right">
-        <a href="sign.html" class="sign-in-btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+        <a href="{{route('login')}}" class="sign-in-btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
     </div>
 </header>
 <nav id="sidebar">

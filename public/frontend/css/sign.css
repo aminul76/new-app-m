@@ -31,7 +31,7 @@ body {
     text-align: center;
     position: relative;
      /* Position relative to place the back button absolutely */
-    
+
 }
 
 .back-button {
@@ -88,19 +88,53 @@ button:hover {
     background-color: #2a5db0;
 }
 
+
+/* General styling for the Google sign-in container */
 .google-signin {
-    margin-top: 1em;
+    text-align: center; /* Center the button within its container */
+    margin: 20px; /* Add some margin around the container */
 }
 
-.google-signin button {
-    background: linear-gradient(135deg, #970303, #570000);
-    border: none;
+/* Styling for the Google button */
+.google-button {
+    display: inline-flex;
+    align-items: center; /* Align items vertically in the center */
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #012a3f, #860436); /* Warm Blue to Warm Purple */
+
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
 }
 
-.google-signin button:hover {
-    background: linear-gradient(135deg, #970303, #570000);
-    background-color: #c1351d;
+.google-button i {
+    margin-right: 8px; /* Space between the icon and text */
 }
+
+/* Styling for hover effect */
+.google-button:hover {
+    background-color: #357AE8; /* Darker blue for hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Styling for focus effect */
+.google-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5); /* Blue outline on focus */
+}
+
+/* Optional: Add a responsive design */
+
+
+.google-icon.google-blue { color: #4285F4; }
+.google-icon.google-red { color: #DB4437; }
+.google-icon.google-yellow { color: #F4B400; }
+.google-icon.google-green { color: #0F9D58; }
+
 .register-link {
     margin-top: 1.5em;
 }
@@ -122,10 +156,10 @@ button:hover {
 
 
 @media (max-width: 768px) {
-    
-    
+
+
 }
 
 @media (max-width: 480px) {
-   
+
 }

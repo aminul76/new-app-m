@@ -19,6 +19,10 @@ use App\Http\Controllers\Admin\QuestionImortConroller;
 use App\Http\Controllers\Admin\ImportLabalController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ModelTestController;
+use App\Http\Controllers\Admin\CourseSubjectController;
+use App\Http\Controllers\Admin\CourseTopicController;
+
+
 
 use App\Http\Controllers\FrontendController;
 
@@ -29,6 +33,7 @@ Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/courses/{slug}', [FrontendController::class, 'courses'])->name('courses.index');
 
+Route::get('/courses/{courseSlug}/{subjectSlug}', [FrontendController::class, 'topic'])->name('courses.topic');
 
 
 
@@ -72,6 +77,9 @@ Route::group([
 
     Route::resource('model_tests', ModelTestController::class);
 
+    Route::resource('course-subject', CourseSubjectController::class);
+
+    Route::resource('course-topic', CourseTopicController::class);
 
     //import
     Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
@@ -96,6 +104,10 @@ Route::group([
     // Additional Routes for AJAX Requests
     Route::get('/get-topics/{subjectId}', [AjaxController::class, 'getTopics'])->name('getTopics');
     Route::get('/get-questions/{topicId}', [AjaxController::class, 'getQuestions'])->name('get-questions');
+
+    // routes/web.php
+
+
 
 
 });

@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{asset('frontend/css/main.css')}}">
 @endsection
 @section('content')
+@include('frontend.include.header')
 <main>
     <!-- Title Card -->
     <div class="title-card">
