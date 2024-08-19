@@ -9,4 +9,19 @@ class ExamQuestionYear extends Model
 {
     use HasFactory;
     protected $fillable = ['exam_id', 'year_id', 'question_id'];
+    
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

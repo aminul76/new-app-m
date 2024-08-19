@@ -66,4 +66,5 @@ class Question extends Model
     {
         return $this->hasMany(ModelTestQuestion::class);
     }
+    
 }

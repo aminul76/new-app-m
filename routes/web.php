@@ -38,6 +38,9 @@ Route::get('/courses/{courseSlug}/{subjectSlug}', [FrontendController::class, 't
 
 
 
+Route::get('/topics/{course_id}/{topic_id}/questions', [FrontendController::class, 'showQuestions'])->name('topics.questions');
+
+
 // Route::get('import', [ImportController::class, 'index']);
 // Route::post('import', [ImportController::class, 'import'])->name('import');
 // Route::get('export', [ImportController::class, 'export'])->name('export');

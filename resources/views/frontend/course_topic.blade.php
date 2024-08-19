@@ -4,16 +4,16 @@
 
 
 
+
+
+@section('content')
+
 <div class="topic-header">
     <button class="back-button" onclick="javascript:history.back()">
       <span>&#x2190;</span> <!-- Left arrow for back -->
     </button>
     <h2 class="topic-title">অনুশীলন</h2>
   </div>
-
-
-
-@section('content')
 
 <main>
 
@@ -27,16 +27,22 @@
 
 
         @forelse ($topics as $topics)
-        <a href="{{ url('/courses/' . urlencode($topics->t_slug) . '/' . urlencode($topics->t_slug)) }}" class="subject-icon-card">
+        <a href="{{ route('topics.questions', [$course->id, $topics->topic_id]) }}" class="subject-icon-card">
             <i class="fas fa-book"></i>
-            <p>{{ $topics->t_title }}</p>
-            <i class="fas fa-lock"></i>
+            <p>{{ $topics->topic_name }}</p>
+            @if ($subscription==null)
+            <i class="fas fa-lock"></i>  
+            @else
+            <i class="fas fa-chevron-right"></i>   
+            @endif
+            
+          
         </a>
-    @empty
-        <p>No subjects available for this course.</p>
-    @endforelse
+        @empty
+            <p>No subjects available for this course.</p>
+        @endforelse
 
-    </div>
+        </div>
 
 
 
@@ -47,6 +53,18 @@
     </div>
 
 
+    @section('footerblade')
+    <a href="index.html">
+       <i class="fas fa-home"></i>
+       <span class="footer-text">Home</span>
+   </a>
+   <a href="routine.html">
+       <i class="fas fa-calendar-check"></i>
+       <span class="footer-text">Routine</span>
+   </a>
+        
+    @endsection
+   
 
 
 </main>

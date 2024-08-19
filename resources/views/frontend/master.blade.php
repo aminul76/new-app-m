@@ -17,8 +17,27 @@
 <body>
    
     @yield('content')
-    @include('frontend.include.footer')
+   
+    
     @yield('js')
+
+
+
+    <footer>
+        <div class="footer-icons">
+          @yield('footerblade')
+            <a href="result.html">
+                <i class="fas fa-chart-line"></i>
+                <span class="footer-text">Results</span>
+            </a>
+            <a href="profile.html">
+                <i class="fas fa-user"></i>
+                <span class="footer-text">Profile</span>
+            </a>
+    
+        </div>
+    </footer>
+    
 </body>
 
 </html>

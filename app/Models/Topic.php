@@ -26,6 +26,7 @@ class Topic extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+   
 
 
 }
