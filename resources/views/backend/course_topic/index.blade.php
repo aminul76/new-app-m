@@ -1,6 +1,7 @@
 @extends('backend.master')
 @section('content')
     <h1>Courses with topics</h1>
+    
     @foreach($courses as $course)
         <h3>{{ $course->c_title }}
             <a href="{{ route('admin.course-topic.edit', $course->id) }}">Edit</a>

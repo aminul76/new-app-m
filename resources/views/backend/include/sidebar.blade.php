@@ -42,6 +42,17 @@
             </ul>
         </li>
 
+
+        
+        <li>
+            <a href="">Subcribe</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.course-subscribes.index') }}">Subcribe</a></li>
+
+
+            </ul>
+        </li>
+
         {{-- <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li> --}}
 

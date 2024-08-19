@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ModelTestController;
 use App\Http\Controllers\Admin\CourseSubjectController;
 use App\Http\Controllers\Admin\CourseTopicController;
+use App\Http\Controllers\Admin\CourseSubscribeController;
 
 
 
@@ -80,6 +81,9 @@ Route::group([
     Route::resource('course-subject', CourseSubjectController::class);
 
     Route::resource('course-topic', CourseTopicController::class);
+
+    Route::resource('course-subscribes', CourseSubscribeController::class);
+
 
     //import
     Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
