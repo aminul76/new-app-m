@@ -285,7 +285,7 @@ nav[role="navigation"] {
 
 
               @section('footerblade')
-              <a href="index.html">
+              <a href="{{ url('/courses', $course->c_slug) }}">
                  <i class="fas fa-home"></i>
                  <span class="footer-text">Home</span>
              </a>

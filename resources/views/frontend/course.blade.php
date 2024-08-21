@@ -204,21 +204,9 @@
         <button class="subscription-b-btn">Subscribe</button>
     </div>
 
+@include('frontend.include.coursefooter')
 
 
-
-
- @section('footerblade')
- <a href="index.html">
-    <i class="fas fa-home"></i>
-    <span class="footer-text">Home</span>
-</a>
-<a href="routine.html">
-    <i class="fas fa-calendar-check"></i>
-    <span class="footer-text">Routine</span>
-</a>
-     
- @endsection
 
 </main>
 

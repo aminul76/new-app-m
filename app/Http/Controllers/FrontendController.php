@@ -143,7 +143,10 @@ class FrontendController extends Controller
     $questions = Question::where('topic_id', $topic_id)
             ->with('options')
             ->paginate(20); // Show 20 questions per page
+
+     $course = Course::where('id', $course_id)->first();
+           
     
-       return view('frontend.topic_question', compact('questions'));
+       return view('frontend.topic_question', compact('questions','course'));
    }
 }

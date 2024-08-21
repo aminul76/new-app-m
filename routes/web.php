@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\CourseSubjectController;
 use App\Http\Controllers\Admin\CourseTopicController;
 use App\Http\Controllers\Admin\CourseSubscribeController;
 
-
+use App\Http\Controllers\Author\AuthorModeltest;
 
 use App\Http\Controllers\FrontendController;
 
@@ -39,6 +39,9 @@ Route::get('/courses/{courseSlug}/{subjectSlug}', [FrontendController::class, 't
 
 
 Route::get('/topics/{course_id}/{topic_id}/questions', [FrontendController::class, 'showQuestions'])->name('topics.questions');
+
+Route::get('/model-tests/current/{courseSlug}', [AuthorModeltest::class, 'current'])->name('model-tests.current');
+Route::get('/model-tests/{courseSlug}/{date}', [AuthorModeltest::class, 'dateModelTest'])->name('model-tests.date');
 
 
 // Route::get('import', [ImportController::class, 'index']);
@@ -59,6 +62,24 @@ Route::post('/ajax-login', [LoginController::class, 'ajaxLogin']);
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+
+
+// Ensure the namespace is correct and matches the controller file location
+Route::group([
+    'as' => 'author.',
+    'prefix' => 'author',
+    'namespace' => 'App\Http\Controllers\Author',
+    'middleware' => ['auth', 'author'],
+], function () {
+    Route::get('dashboard', [AuthorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/mode-text/{course_slug}/{modeltest_id}/exam', [AuthorModeltest::class, 'examModel'])->name('mode-text.exam');
+    Route::post('/mode-text/{course_slug}/{modeltest_id}/submit', [AuthorModeltest::class, 'submitExam'])->name('mode-text.submit');
+
+});
+
+
 
 
 
@@ -121,12 +142,3 @@ Route::group([
 
 
 
-// Ensure the namespace is correct and matches the controller file location
-Route::group([
-    'as' => 'author.',
-    'prefix' => 'author',
-    'namespace' => 'App\Http\Controllers\Author',
-    'middleware' => ['auth', 'author'],
-], function () {
-    Route::get('dashboard', [AuthorDashboardController::class, 'index'])->name('dashboard');
-});

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('status');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->integer('set_time');
             $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 

@@ -37,7 +37,7 @@ class ModelTestController extends Controller
             'course_id' => 'required|exists:courses,id',
             'status' => 'required|integer',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'end_date' => 'required|date',
         ]);
        
 
@@ -68,7 +68,7 @@ class ModelTestController extends Controller
             'course_id' => 'required|exists:courses,id',
             'status' => 'required|integer',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'end_date' => 'required|date',
         ]);
 
         $modelTest->update($request->all());

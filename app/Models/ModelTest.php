@@ -22,10 +22,15 @@ class ModelTest extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    public function questions()
-    {
-        return $this->belongsToMany(Question::class, 'model_test_questions')
-                    ->withPivot('subject_id', 'topic_id')
-                    ->withTimestamps();
-    }
+   // Relationship to ModelTestQuestion
+   public function modelTestQuestions()
+   {
+       return $this->hasMany(ModelTestQuestion::class);
+   }
+
+   // Relationship to Question through ModelTestQuestion
+   public function questions()
+   {
+       return $this->hasMany(ModelTestQuestion::class);
+   }
 }

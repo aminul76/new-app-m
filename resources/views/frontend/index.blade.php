@@ -166,7 +166,7 @@
  {{-- start footer --}}
 
  @section('footerblade')
- <a href="index.html">
+ <a href="{{ url('/') }}">
     <i class="fas fa-home"></i>
     <span class="footer-text">Home</span>
 </a>
