@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('c_title');
             $table->string('c_slug');
+            $table->text('c_description')->nullable();
+            $table->text('c_colour')->nullable();
+            $table->string('c_image')->nullable();
+            $table->string('c_seo_title')->nullable();
+            $table->string('c_seo_image')->nullable();
+            $table->string('c_seo_description')->nullable();
+            $table->text('c_keyword')->nullable();
             $table->timestamps();
         });
     }

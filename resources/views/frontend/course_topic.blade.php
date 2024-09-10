@@ -1,4 +1,29 @@
 @extends('frontend.master')
+@section('seo')
+   <!-- General Meta Tags -->
+   <meta name="description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="keywords" content="{{ $course->c_keyword }}">
+   
+   <!-- Open Graph Meta Tags for Social Media -->
+   <meta property="og:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta property="og:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta property="og:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   <meta property="og:url" content="{{ url()->current() }}">
+   <meta property="og:type" content="course">
+   <meta property="og:site_name" content="{{ config('app.name') }}">
+   
+   <!-- Twitter Card Meta Tags -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta name="twitter:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="twitter:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   
+   <!-- Favicon (Optional) -->
+   <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
+   
+   <!-- Title -->
+   <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
+@endsection
 @section('style')
 @endsection
 

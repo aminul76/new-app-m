@@ -1,4 +1,33 @@
+@auth
 @extends('frontend.master')
+
+
+
+@section('seo')
+   <!-- General Meta Tags -->
+   <meta name="description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="keywords" content="{{ $course->c_keyword }}">
+   
+   <!-- Open Graph Meta Tags for Social Media -->
+   <meta property="og:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta property="og:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta property="og:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   <meta property="og:url" content="{{ url()->current() }}">
+   <meta property="og:type" content="course">
+   <meta property="og:site_name" content="{{ config('app.name') }}">
+   
+   <!-- Twitter Card Meta Tags -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta name="twitter:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="twitter:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   
+   <!-- Favicon (Optional) -->
+   <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
+   
+   <!-- Title -->
+   <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
+@endsection
 @section('style')
 @endsection
 @section('content')
@@ -6,8 +35,8 @@
 <main>
     <!-- Title Card -->
     <div class="title-card">
-        <h1>Title Card</h1>
-        <p>This card is always displayed as one.</p>
+        <h2>{{ $course->c_title }}</h2>
+        <p>{{ $course->c_description }}</p>
     </div>
 
     <!-- Category Cards -->
@@ -24,53 +53,42 @@
 
 
 
-    <h4> Exam</h4>
+   
     <div class="category-cards">
 
 
 
 
-        <a href="#" class="category-card">
-            <div class="card-icon"><i class="fas fa-calendar-day"></i></div>
+
+
+        <a href="{{ url('/model-tests/current', $course->c_slug) }}" class="category-card">
+            <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
             <div class="card-content">
-                <h2 class="card-title">Live Exam</h2>
+                <h2 class="card-title">রুটিন এক্সাম</h2>
             </div>
             <div class="live-text">Live</div>
         </a>
+
 
 
         <a href="#" class="category-card">
             <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
             <div class="card-content">
-                <h2 class="card-title">Free Exam</h2>
+                <h2 class="card-title">ফ্রি এক্সাম</h2>
             </div>
             <div class="live-text">Free</div>
         </a>
 
-        <a href="routine.html" class="category-card">
-            <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
-            <div class="card-content">
-                <h2 class="card-title">Routine Exam</h2>
-            </div>
-            <div class="live-text">Live</div>
-        </a>
+      
 
-        <a href="#" class="category-card">
-            <div class="card-icon"><i class="fas fa-question-circle"></i></div>
-            <div class="card-content">
-                <h2 class="card-title">NTRCA Question</h2>
-
-            </div>
-
-        </a>
-
+   
 
     </div>
 
 
 
     <!-- Subject Icons Section -->
-    <h4> Exam</h4>
+    <h4> সাজেশন</h4>
     <div class="subject-icons-section">
 
 
@@ -88,7 +106,7 @@
     {{-- <a href="{{ route('subject.show', $subject->id) }}" --}}
 
 
-    <h4> Exam</h4>
+    {{-- <h4> Exam</h4>
     <div class="category-cards">
 
         <a href="#" class="category-card">
@@ -125,9 +143,9 @@
         </a>
     </div>
 
+ --}}
 
-
-
+{{-- 
     <!-- Promotion Card -->
     <h4> Exam</h4>
     <div class="promotion-card">
@@ -172,7 +190,7 @@
 
 
         <!-- Add more blog-post-card elements as needed -->
-    </div>
+    </div> --}}
 
 
 
@@ -213,4 +231,110 @@
 
 
 @endsection
+@endauth
+@guest
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+
+   <!-- General Meta Tags -->
+   <meta name="description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="keywords" content="{{ $course->c_keyword }}">
+   
+   <!-- Open Graph Meta Tags for Social Media -->
+   <meta property="og:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta property="og:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta property="og:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   <meta property="og:url" content="{{ url()->current() }}">
+   <meta property="og:type" content="course">
+   <meta property="og:site_name" content="{{ config('app.name') }}">
+   
+   <!-- Twitter Card Meta Tags -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
+   <meta name="twitter:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
+   <meta name="twitter:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   
+   <!-- Favicon (Optional) -->
+  <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
+   
+   <!-- Title -->
+   <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
+
+    <link rel="stylesheet" href="{{ asset('frontend/css/sign.css') }}">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="sing-backround">
+        {{-- <a href="{{url('/')}}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back
+        </a> --}}
+     
+        <div class="form-container">
+            <h1>সাইন একাউন্ট</h1>
+
+            {{-- <form id="loginForm">
+                @csrf
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+
+            </form> --}}
+            <div class="google-signin">
+                <a href="{{ url('auth/google') }}" class="google-button">
+                    <i class="fab fa-google google-icon"></i> Sign in with Google
+                </a>
+            </div>
+            <div id="loginMessage"></div>
+
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '/ajax-login',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            $('#loginMessage').text(response.message);
+                            window.location.href = '/home'; // Redirect to a secure page
+                        } else {
+                            $('#loginMessage').text(response.message);
+                        }
+                    },
+                    error: function(response) {
+                        $('#loginMessage').text('An error occurred. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+@endguest
 

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->unsignedBigInteger('course_id');
             $table->integer('status');
+            $table->text('m_description')->nullable();
+            $table->string('mark')->nullable();;
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->integer('set_time');

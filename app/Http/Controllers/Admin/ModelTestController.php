@@ -36,6 +36,8 @@ class ModelTestController extends Controller
             'slug' => 'required|string|max:255|unique:model_tests',
             'course_id' => 'required|exists:courses,id',
             'status' => 'required|integer',
+            'm_description' => 'required',
+            'mark' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
@@ -66,6 +68,8 @@ class ModelTestController extends Controller
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:model_tests,slug,' . $modelTest->id,
             'course_id' => 'required|exists:courses,id',
+            'm_description' => 'required',
+            'mark' => 'required|string|max:255',
             'status' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'required|date',

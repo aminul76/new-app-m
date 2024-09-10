@@ -39,21 +39,96 @@
     border-color: #6c757d;
   }
 </style>
+<link rel="stylesheet" href="{{asset('frontend/css/mark.css')}}">
 @endsection
 
 @section('content')
 <div class="topic-header">
-    <button class="back-button" onclick="javascript:history.back()">
-      <span>&#x2190;</span> <!-- Left arrow for back -->
+    <button class="back-button" onclick="javascript:history.go(-2)">
+        <span>&#x2190;</span> <!-- Left arrow for back -->
     </button>
-    <h2 class="topic-title">Exam Results</h2>
+    <h2 class="topic-title">পরিক্ষার রিজাল্ট</h2>
 </div>
 
 <main>
-<div class="container">
-    <h1>{{ $modelTest->title }}</h1>
 
-    <h3>All Questions and Answers:</h3>
+
+    <div class="container-mark-div">
+        <div class="container-mark">
+            <div class="header-mark">
+                <h1>{{ $modelTest->title }}</h1>
+                <p>{{ auth()->user()->name }}</p>
+                <p>পরিক্ষার তারিখ: {{$dateBangla}}</p>
+            </div>
+            {{-- <div class="marks-mark">
+                <div class="status-info">
+                    মোট পরীক্ষার্থী সংখ্যা<br>{{ $totals->total_users +225}}
+                </div>
+                <div class="status-success">
+                    উত্তীর্ণ পরীক্ষার্থীর সংখ্যা<br>1283
+                </div>
+            </div>
+            --}}
+            <div class="marks-mark"> 
+                <div class="status-success">
+                   সঠিক উত্তর<br>{{ $totals->total_right_answers }} টি
+                </div>
+                <div class="marks-failed">
+                    আপনার মার্ক<br>{{ $totals->total_right_answers - $totals->total_wrong_answers*.25 }}
+                </div>
+
+
+            </div>
+
+            {{-- <div class="marks-mark">
+
+
+                <div class="marks-failed">
+                    আপনার ফলাফল<br>অনুত্তীর্ণ
+                </div>
+                <div class="status-info">
+                    আপনার অবস্থান<br>5606 থেকে 5907 এর মধ্যে।
+                </div>
+            </div> --}}
+            <div class="table-responsive">
+                <table class="mark-sheet">
+                    <thead>
+                        <tr>
+                            <th>বিষয়</th>
+                            <th>সঠিক</th>
+                            <th>ভুল</th>
+                            <th>মার্ক</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($subjects as $subject)
+                        <tr>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>{{ $subject->right_answers }}</td>
+                            <td>{{ $subject->wrong_answers }}</td>
+                            <td>{{ $subject->right_answers - $subject->wrong_answers*.25 }}</td>
+                        </tr>
+                    @endforeach
+                        <tr>
+                            <td>মোট</td>
+                            <td>{{ $totals->total_right_answers }}</td>
+                            <td>{{ $totals->total_wrong_answers }}</td>
+                            <td>{{ $totals->total_right_answers - $totals->total_wrong_answers*.25 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{-- <div class="preparation-level">
+                <div class="preparation-poor">খারাপ</div>
+            </div>
+            <div class="buttons-mark">
+                <a href="#" class="button-view-answer">উত্তরপত্র দেখুন</a>
+                <a href="#" class="button-merit-list">মেরিট লিস্ট</a>
+            </div> --}}
+        </div>
+    </div>
+<div class="container">
+   
     @foreach ($modelTest->modelTestQuestions as $modelTestQuestion)
         @if($modelTestQuestion->question)
             <div class="mb-4">

@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\course;
 use App\Models\Topic;
 use App\Models\Question;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CourseSubscribe;
 use Carbon\Carbon;
+
 
 use Illuminate\Support\Facades\DB;
 class FrontendController extends Controller
@@ -16,7 +18,8 @@ class FrontendController extends Controller
    public function index(){
 
     $courses = Course::all();
-    return view('frontend.index',compact('courses'));
+    $settings = Setting::first();
+    return view('frontend.index',compact('courses','settings'));
 
    }
    public function courses($slug)
@@ -64,9 +67,9 @@ class FrontendController extends Controller
        $user = Auth::user();
             
        // Check if the user is authenticated
-       if (!$user) {
-           return redirect()->route('login')->with('error', 'Please log in to view the questions.');
-       }
+        if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
 
        $subscription = CourseSubscribe::where('user_id', $user->id)
        ->where('course_id', $course->id)
@@ -121,10 +124,10 @@ class FrontendController extends Controller
    public function showQuestions($course_id,$topic_id)
    {
     $user = Auth::user();
-        
+    $course = Course::where('id', $course_id)->first();
     // Check if the user is authenticated
     if (!$user) {
-        return redirect()->route('login')->with('error', 'Please log in to view the questions.');
+        return view('frontend.course', ['course' => $course,]);
     }
 
     $subscription = CourseSubscribe::where('user_id', $user->id)
@@ -144,7 +147,7 @@ class FrontendController extends Controller
             ->with('options')
             ->paginate(20); // Show 20 questions per page
 
-     $course = Course::where('id', $course_id)->first();
+     
            
     
        return view('frontend.topic_question', compact('questions','course'));

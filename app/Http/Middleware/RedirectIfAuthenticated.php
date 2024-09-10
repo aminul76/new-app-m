@@ -21,7 +21,9 @@ class RedirectIfAuthenticated
             return redirect()->route('admin.dashboard');
         } elseif (Auth::guard($guard)->check() && Auth::user()->role->id == 2)
         {
-            return redirect()->route('author.dashboard');
+          
+            $redirectUrl = session()->get('url.intended');
+            return redirect($redirectUrl);
         }else {
             return $next($request);
         }

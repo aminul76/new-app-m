@@ -13,6 +13,8 @@ class ModelTest extends Model
         'slug',
         'course_id',
         'status',
+        'm_description',
+        'mark',
         'start_date',
         'end_date',
     ];
@@ -32,5 +34,10 @@ class ModelTest extends Model
    public function questions()
    {
        return $this->hasMany(ModelTestQuestion::class);
+   }
+
+   public function userExamRecords()
+   {
+       return $this->hasMany(UserExamRecord::class, 'modeltest_id');
    }
 }

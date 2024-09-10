@@ -1,186 +1,69 @@
 @extends('frontend.master')
+@section('seo')
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ $settings->site_short_description }}">
+<meta name="keywords" content="{{ $settings->keyword }}">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="{{ $settings->site_title }}">
+<meta property="og:description" content="{{ $settings->site_description }}">
+<meta property="og:image" content="{{ asset('images/siteimage/' . $settings->site_image) }}">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="article">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $settings->site_title }}">
+<meta name="twitter:description" content="{{ $settings->site_short_description }}">
+<meta name="twitter:image" content="{{ asset('images/siteimage/' . $settings->site_image) }}">
+
+<!-- Favicon -->
+<link rel="icon" href="{{ asset('images/siteimage/' . $settings->site_favicon) }}" type="image/x-icon">
+
+<title>{{ $settings->site_title }}</title>
+@endsection
 @section('style')
-<link rel="stylesheet" href="{{asset('frontend/css/main.css')}}">
+
+
+
+    <link rel="stylesheet" href="{{ asset('frontend/css/main.css') }}">
+
+   
+
 @endsection
 @section('content')
-@include('frontend.include.header')
-<main>
-    <!-- Title Card -->
-    <div class="title-card">
-        <h1>Title Card</h1>
-        <p>This card is always displayed as one.</p>
-    </div>
-
-    <!-- Category Cards -->
-
-
-
-
-    <!-- Category Cards -->
-
-    <div class="course-body">
-        @foreach ($courses as $course)
-        <a class="course-card running" href="{{ url('/courses', $course->c_slug) }}" style="background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Blue to Purple Gradient */">
-            <img src="{{asset('frontend/image/ntrca.png')}}" alt="ABC Blocks">
-            <h3>ডেইলি মডেল টেস্ট (মার্কস: ৫০)</h3>
-            <p>সময়: ২০ মিনিট</p>
-        </a>
-    @endforeach
-    </div>
-
-
-
-
-
-
-<h4> Exam</h4>
-<div class="category-cards">
-
-
-
-
-<a href="#" class="category-card">
-    <div class="icon-container">
-        <img src="{{asset('frontend/image/bcs.png')}}" alt="Icon" class="icon-image">
-    </div>
-    <div class="card-content">
-        <h2 class="card-title">বিসিএস</h2>
-    </div>
-
-</a>
-
-
-<a href="#" class="category-card">
-    <div class="icon-container">
-        <img src="{{asset('frontend/image/ntrca.png')}}" alt="Icon" class="icon-image">
-    </div>
-        <div class="card-content">
-            <h2 class="card-title">এনটিআরসি</h2>
-        </div>
-    </a>
-
-    <a href="routine.html" class="category-card">
-        <div class="icon-container">
-            <img src="{{asset('frontend/image/primary.png')}}" alt="Icon" class="icon-image">
-        </div>
-        <div class="card-content">
-            <h2 class="card-title">প্রাইমারি</h2>
+    @include('frontend.include.indexheader')
+    <main>
+        <!-- Title Card -->
+        <div class="title-card" style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
+            <h2>{{ $settings->site_title }}</h2>
+            <p>{{ $settings->site_short_description }}</p>
         </div>
 
-    </a>
+        <!-- Category Cards -->
 
-    <a href="#" class="category-card">
-        <div class="card-icon"><i class="fas fa-question-circle"></i></div>
-        <div class="card-content">
-            <h2 class="card-title">NTRCA Question</h2>
 
+
+
+        <!-- Category Cards -->
+
+        <div class="course-body">
+            @foreach ($courses as $course)
+                <a class="course-card running" href="{{ url('/courses', $course->c_slug) }}" style="{{ $course->c_colour }}">
+                    <img src="{{ asset('images/courseimage/' . $course->c_image) }}" alt="{{ $course->c_title }}">
+                    <h3>{{ $course->c_title }}</h3>
+                    {{-- <p style="text-align: justify">{{$course->c_description}}</p> --}}
+                </a>
+            @endforeach
         </div>
 
-    </a>
-
-
-</div>
 
 
 
 
 
-
-
-
-<!-- Promotion Card -->
-
-<div class="promotion-card">
-<div class="promotion-content">
-    <h2 class="promotion-title">Special Offer</h2>
-    <p class="promotion-description">Get 50% off on all courses for a limited time. Don't miss out!</p>
-</div>
-<div class="promotion-button">
-    <a href="#" class="promotion-btn">Learn More</a>
-</div>
-</div>
-
-
-<!-- Blog Post Cards -->
-<h4> Exam</h4>
-<div class="blog-posts">
-<div class="blog-post-card">
-    <div class="blog-post-content">
-        <h2 class="blog-post-title">Blog Post Title 1</h2>
-        <p class="blog-post-snippet">This is a short snippet or excerpt from the blog post. It gives a preview of the content.</p>
-        <a href="#" class="read-more-link">Read More</a>
-    </div>
-</div>
-<div class="blog-post-card">
-    <div class="blog-post-content">
-        <h2 class="blog-post-title">Blog Post Title 2</h2>
-        <p class="blog-post-snippet">This is another snippet or excerpt from a different blog post. It gives a preview of the content.</p>
-        <a href="#" class="read-more-link">Read More</a>
-    </div>
-</div>
-
-<div class="blog-post-card">
-    <div class="blog-post-content">
-        <h2 class="blog-post-title">Blog Post Title 2</h2>
-        <p class="blog-post-snippet">This is another snippet or excerpt from a different blog post. It gives a preview of the content.</p>
-        <a href="#" class="read-more-link">Read More</a>
-    </div>
-</div>
-
-
-<!-- Add more blog-post-card elements as needed -->
-</div>
-
-
-
-<!-- Social Media Cards -->
-<div class="social-media-cards">
-<div class="social-media-card facebook-card">
-    <div class="social-media-icon"><i class="fab fa-facebook-f"></i></div>
-    <div class="social-media-content">
-        <h2 class="social-media-title">Join Our Facebook Group</h2>
-    </div>
-    <a href="#" class="social-media-btn">Join Now</a>
-</div>
-
-<div class="social-media-card whatsapp-card">
-    <div class="social-media-icon"><i class="fab fa-whatsapp"></i></div>
-    <div class="social-media-content">
-        <h2 class="social-media-title">Join Our WhatsApp Group</h2>
-    </div>
-    <a href="#" class="social-media-btn">Join Now</a>
-</div>
-</div>
-
-
-
-
-<!-- Subscription Section -->
-<div class="subscription-section">
-<h2 class="subscription-title">Subscribe to our newsletter</h2>
-<button class="subscription-b-btn">Subscribe</button>
-</div>
-
-<!-- End Subscription Section -->
-
- {{-- start footer --}}
-
- @section('footerblade')
- <a href="{{ url('/') }}">
-    <i class="fas fa-home"></i>
-    <span class="footer-text">Home</span>
-</a>
-<a href="routine.html">
-    <i class="fas fa-calendar-check"></i>
-    <span class="footer-text">Routine</span>
-</a>
-     
- @endsection
-
-{{-- end footer --}}
 
 
 
 </main>
 @endsection
-

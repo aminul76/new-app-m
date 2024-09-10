@@ -9,11 +9,11 @@
             <span class="footer-text">Routine</span>
         </a>
              
-        <a href="result.html">
+        <a href="{{ url('/modelresultlist', $course->c_slug) }}">
             <i class="fas fa-chart-line"></i>
             <span class="footer-text">Results</span>
         </a>
-        <a href="profile.html">
+        <a href="{{ url('/profile', $course->c_slug) }}">
             <i class="fas fa-user"></i>
             <span class="footer-text">Profile</span>
         </a>

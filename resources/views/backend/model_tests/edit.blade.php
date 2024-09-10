@@ -23,6 +23,18 @@
                 @endforeach
             </select>
         </div>
+
+
+        <div class="form-group">
+            <label for="m_description">Description</label>
+            <textarea id="m_description" name="m_description" class="form-control" rows="4" required>{{ old('m_description', $modelTest->m_description) }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="mark">Mark</label>
+            <input type="text" id="mark" name="mark" class="form-control" maxlength="255" value="{{ old('mark', $modelTest->mark) }}" required>
+        </div>
+
         <div>
             <label for="status">Status</label>
             <input type="number" name="status" id="status" value="{{ old('status', $modelTest->status) }}">

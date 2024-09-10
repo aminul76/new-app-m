@@ -58,7 +58,7 @@
 }
 
 .topic-details {
-    display: flex;
+   
     justify-content: space-between; /* Space out topic name and points */
     align-items: center; /* Align items to the center vertically */
     margin-top: 10px; /* Space between subject name and topic details */

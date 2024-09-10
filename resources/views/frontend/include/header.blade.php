@@ -3,9 +3,9 @@
         <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <div class="logo">LIVE EXAM</div>
     </div>
-    <div class="header-right">
+    {{-- <div class="header-right">
         <a href="{{route('login')}}" class="sign-in-btn"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-    </div>
+    </div> --}}
 </header>
 <nav id="sidebar">
     <div class="sidebar-header">
@@ -13,11 +13,10 @@
         <div class="close-icon" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
     </div>
     <ul>
-        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-calendar-day"></i> Live Exam</a></li>
-        <li><a href="routine.html"><i class="fas fa-clock"></i> Routine Exam</a></li>
-        <li><a href="#"><i class="fas fa-star"></i> Free Exam</a></li>
-        <li><a href="#"><i class="fas fa-chart-line"></i> Result</a></li>
+        <li><a href="{{ url('/courses', $course->c_slug) }}"><i class="fas fa-home"></i> হোম</a></li>
+        <li><a href="{{ url('/model-tests/current', $course->c_slug) }}"><i class="fas fa-clock"></i> রুটিন এক্সাম</a></li>
+        <li><a href="{{ url('/modelresultlist', $course->c_slug) }}"><i class="fas fa-chart-line"></i> রেজাল্ট </a></li>
+        <li><a href="{{ url('/profile', $course->c_slug) }}"><i class="fas fa-user"></i> প্রোফাইল </a></li>
 
     </ul>
 </nav>

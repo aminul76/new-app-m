@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\ModelTest;
 use App\Models\Course;
 use App\Helpers\DateHelper;
@@ -12,6 +13,7 @@ use App\Models\Option;
 use App\Models\UserModelAnswer;
 use App\Models\UserExamRecord;
 use App\Models\Answer;
+use App\Models\CourseSubscribe;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -25,11 +27,12 @@ class AuthorModeltest extends Controller
         $user = Auth::user();
         
         // Check if the user is authenticated
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Please log in to view the questions.');
-        }
-
+    
         $course = Course::where('c_slug', $courseSlug)->first();
+
+        if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
 
         $currentDate = Carbon::now();
        
@@ -54,10 +57,21 @@ class AuthorModeltest extends Controller
     {
      
      
+    
+        $user = Auth::user();
+        
+        // Check if the user is authenticated
+    
 
+     
      
         // Find the course by slug
         $course = Course::where('c_slug', $courseSlug)->firstOrFail();
+
+        if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
+
         $date = \Carbon\Carbon::parse($date);
         // Fetch model tests for the given course and date
         // Assuming we want tests that overlap with the given date
@@ -91,11 +105,34 @@ class AuthorModeltest extends Controller
     function examModel($course_slug,$modeltest_id) {
 
         $course = Course::where('c_slug', $course_slug)->first();
+
+        $user = Auth::user();
+        
+        // Check if the user is authenticated
+         if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
+
         $modelTest = ModelTest::with('questions.question.options')->findOrFail($modeltest_id);
         
 
 
+       
+    
+        $subscription = CourseSubscribe::where('user_id', $user->id)
+        ->where('course_id', $course->id)
+        ->where(function ($query) {
+            $query->whereNull('expires_at')
+                  ->orWhere('expires_at', '>=', Carbon::now());
+        })
+        ->first();
+    
+    // If no active subscription, show an error or redirect
+        if (!$subscription) {
+            return redirect()->route('subscription.error')->with('error', 'Your subscription has expired or does not exist.');
+        }
 
+//end subcribe
 
          // Check if the user has already submitted answers for this test
     $userAnswers = Answer::where('user_id', auth()->id())
@@ -113,11 +150,52 @@ $correctAnswers[$modelTestQuestion->question->id] = $correctOption->p_title;
 }
 }
 
+$subjects = DB::table('answers')
+            ->select('subjects.s_title as subject_name', DB::raw('
+                SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS right_answers,
+                SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_answers
+            '))
+            ->join('options', 'answers.selected_option_id', '=', 'options.id')
+            ->join('subjects', 'answers.subject_id', '=', 'subjects.id')
+            ->where('answers.modeltest_id', $modeltest_id)
+            ->where('user_id', auth()->id())
+            ->groupBy('subjects.id', 'subjects.s_title')
+            ->get();
+
+        // Fetch model test name or other details if needed
+        //$modeltest = DB::table('model_tests')->where('id', $modeltest_id)->first();
+        $totals = DB::table('answers')
+        ->select(DB::raw('
+            SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS total_right_answers,
+            SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS total_wrong_answers,
+            COUNT(DISTINCT answers.user_id) AS total_users
+        '))
+        ->join('options', 'answers.selected_option_id', '=', 'options.id')
+        ->where('answers.modeltest_id', $modeltest_id)
+        ->where('user_id', auth()->id())
+        ->first();
+
+        $answertab=Answer::where('modeltest_id', $modeltest_id)
+        ->first();
+        $currentDate = $answertab->created_at;
+       
+        $date = \Carbon\Carbon::parse($currentDate);
+
+        $formattedDate = $currentDate->format('j F Y'); // English format
+        $formattedDate = DateHelper::toBengaliNumerals($formattedDate);
+        $month = $currentDate->format('F');
+
+        $dateBangla = str_replace($month, DateHelper::toBengaliMonth($month), $formattedDate);
+
+
 return view('user.modeltest.allreadyresults', [
 'modelTest' => $modelTest,
 'userAnswers' => $userAnswers,
 'correctAnswers' => $correctAnswers,
-'course' => $course
+'course' => $course,
+'subjects' => $subjects,
+'totals'=>$totals,
+'dateBangla'=> $dateBangla
 ]);
 }
 
@@ -183,7 +261,12 @@ return view('user.modeltest.allreadyresults', [
             'answers.*' => 'exists:options,id'
         ]);
     
+        $user = Auth::user();
         $course = Course::where('c_slug', $course_slug)->first();
+
+        if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
 
         // মডেল টেস্ট এবং সম্পর্কিত প্রশ্নগুলি আনুন
         $modelTest = ModelTest::with('modelTestQuestions.question.options')->findOrFail($modeltest_id);
@@ -233,6 +316,7 @@ return view('user.modeltest.allreadyresults', [
             [
                 'correct_answers_count' => $correctAnswerCount,
                 'incorrect_answers_count' => $incorrectAnswerCount,
+                'modeltest_count' => $modelTest->mark,
             ]
         );
     
@@ -244,13 +328,86 @@ return view('user.modeltest.allreadyresults', [
                 $correctAnswers[$modelTestQuestion->question->id] = $correctOption->p_title;
             }
         }
+
+
+        $subjects = DB::table('answers')
+            ->select('subjects.s_title as subject_name', DB::raw('
+                SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS right_answers,
+                SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_answers
+            '))
+            ->join('options', 'answers.selected_option_id', '=', 'options.id')
+            ->join('subjects', 'answers.subject_id', '=', 'subjects.id')
+            ->where('answers.modeltest_id', $modeltest_id)
+            ->where('user_id', auth()->id())
+            ->groupBy('subjects.id', 'subjects.s_title')
+            ->get();
+
+        // Fetch model test name or other details if needed
+        //$modeltest = DB::table('model_tests')->where('id', $modeltest_id)->first();
+        $totals = DB::table('answers')
+        ->select(DB::raw('
+            SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS total_right_answers,
+            SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS total_wrong_answers,
+            COUNT(DISTINCT answers.user_id) AS total_users
+        '))
+        ->join('options', 'answers.selected_option_id', '=', 'options.id')
+        ->where('answers.modeltest_id', $modeltest_id)
+        ->where('user_id', auth()->id())
+        ->first();
+
+        $answertab=Answer::where('modeltest_id', $modeltest_id)
+        ->first();
+        $currentDate = $answertab->created_at;
+       
+        $date = \Carbon\Carbon::parse($currentDate);
+
+        $formattedDate = $currentDate->format('j F Y'); // English format
+        $formattedDate = DateHelper::toBengaliNumerals($formattedDate);
+        $month = $currentDate->format('F');
+
+        $dateBangla = str_replace($month, DateHelper::toBengaliMonth($month), $formattedDate);
     
         return view('user.modeltest.results', [
             'modelTest' => $modelTest,
             'userAnswers' => $userAnswers,
             'correctAnswers' => $correctAnswers,
-            'course'=>$course
+            'course'=>$course,
+            'subjects' => $subjects,
+            'totals'=>$totals,
+            'dateBangla'=> $dateBangla
         ]);
+    }
+
+    public function showMarksheet($modeltestId)
+    {
+        // Fetch data for the specific model test
+        $subjects = DB::table('answers')
+            ->select('subjects.s_title as subject_name', DB::raw('
+                SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS right_answers,
+                SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_answers
+            '))
+            ->join('options', 'answers.selected_option_id', '=', 'options.id')
+            ->join('subjects', 'answers.subject_id', '=', 'subjects.id')
+            ->where('answers.modeltest_id', $modeltestId)
+            ->groupBy('subjects.id', 'subjects.s_title')
+            ->get();
+
+
+           
+
+        // Fetch model test name or other details if needed
+        $modeltest = DB::table('model_tests')->where('id', $modeltestId)->first();
+
+        $totals = DB::table('answers')
+        ->select(DB::raw('
+            SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS total_right_answers,
+            SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS total_wrong_answers
+        '))
+        ->join('options', 'answers.selected_option_id', '=', 'options.id')
+        ->where('answers.modeltest_id', $modeltestId)
+        ->first();
+           
+        return view('user.modeltest.markshet', compact('subjects','totals'));
     }
     
 }

@@ -24,6 +24,15 @@
             <label for="status">Status</label>
             <input type="number" name="status" id="status" value="{{ old('status') }}">
         </div>
+        <div class="form-group">
+            <label for="m_description">Description</label>
+            <textarea id="m_description" name="m_description" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="mark">Mark</label>
+            <input type="text" id="mark" name="mark" class="form-control" maxlength="255" required>
+        </div>
         <div>
             <label for="start_date">Start Date</label>
             <input type="datetime-local" name="start_date" id="start_date" value="{{ old('start_date') }}">

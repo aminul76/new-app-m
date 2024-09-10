@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('modeltest_id');
             $table->integer('correct_answers_count')->default(0);
             $table->integer('incorrect_answers_count')->default(0);
+            $table->integer('modeltest_count')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

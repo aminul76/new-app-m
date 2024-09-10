@@ -53,6 +53,25 @@
             </ul>
         </li>
 
+
+        <li>
+            <a href="">Settings</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.settings.index') }}">Settings</a></li>
+
+
+            </ul>
+        </li>
+
+
+        <li>
+            <a href="">User</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.fackuser.import.form') }}">Fack User</a></li>
+
+
+            </ul>
+        </li>
         {{-- <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li> --}}
 
