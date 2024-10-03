@@ -38,8 +38,12 @@
     background-color: #6c757d;
     border-color: #6c757d;
   }
+ 
+
 </style>
 <link rel="stylesheet" href="{{asset('frontend/css/mark.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/css/result.css')}}">
+
 @endsection
 
 @section('content')
@@ -147,13 +151,28 @@
                         </div>
                     @endforeach
                 </div>
+                <p>{{ $modelTestQuestion->question->q_explain }}</p>
+
             </div>
+           
         @else
             <div class="mb-4">
                 <p>Question not found.</p>
             </div>
         @endif
     @endforeach
+
+       
+          
+         
+         
+           
+         
+                 <div class="button-container-result ">
+                    <a href="{{ route('author.merit-list', [$course->c_slug, $modelTest->id]) }}" class="btn-result mark">মেধাতালিকা</a>
+                </div>
+     
+
     
     {{-- <a href="{{ route('author.mode-text.exam', [$course_slug, $modelTest->id]) }}" class="btn btn-primary">Retry Exam</a> --}}
 </div>

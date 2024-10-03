@@ -57,7 +57,7 @@ class AuthorModeltest extends Controller
     {
      
      
-    
+   
         $user = Auth::user();
         
         // Check if the user is authenticated
@@ -71,6 +71,21 @@ class AuthorModeltest extends Controller
         if (!$user) {
             return view('frontend.course', ['course' => $course,]);
         }
+
+        
+        $subscription = CourseSubscribe::where('user_id', $user->id)
+        ->where('course_id', $course->id)
+        ->where(function ($query) {
+            $query->whereNull('expires_at')
+                  ->orWhere('expires_at', '>=', Carbon::now());
+        })
+        ->first();
+    
+    // If no active subscription, show an error or redirect
+        if (!$subscription) {
+            return view('user.subcribe.subcribe', ['course' => $course,]);
+        }
+
 
         $date = \Carbon\Carbon::parse($date);
         // Fetch model tests for the given course and date
@@ -127,30 +142,30 @@ class AuthorModeltest extends Controller
         })
         ->first();
     
-    // If no active subscription, show an error or redirect
+            // If no active subscription, show an error or redirect
         if (!$subscription) {
-            return redirect()->route('subscription.error')->with('error', 'Your subscription has expired or does not exist.');
+            return view('user.subcribe.subcribe', ['course' => $course,]);
         }
 
-//end subcribe
+            //end subcribe
 
          // Check if the user has already submitted answers for this test
-    $userAnswers = Answer::where('user_id', auth()->id())
-    ->where('modeltest_id', $modeltest_id)
-    ->pluck('selected_option_id', 'question_id')
-    ->toArray();
+        $userAnswers = Answer::where('user_id', auth()->id())
+        ->where('modeltest_id', $modeltest_id)
+        ->pluck('selected_option_id', 'question_id')
+        ->toArray();
 
-// If user has already submitted answers, redirect to results page
-if (!empty($userAnswers)) {
-$correctAnswers = [];
-foreach ($modelTest->modelTestQuestions as $modelTestQuestion) {
-$correctOption = $modelTestQuestion->question->options->where('is_correct', true)->first();
-if ($correctOption) {
-$correctAnswers[$modelTestQuestion->question->id] = $correctOption->p_title;
-}
-}
+        // If user has already submitted answers, redirect to results page
+        if (!empty($userAnswers)) {
+        $correctAnswers = [];
+        foreach ($modelTest->modelTestQuestions as $modelTestQuestion) {
+        $correctOption = $modelTestQuestion->question->options->where('is_correct', true)->first();
+        if ($correctOption) {
+        $correctAnswers[$modelTestQuestion->question->id] = $correctOption->p_title;
+        }
+        }
 
-$subjects = DB::table('answers')
+        $subjects = DB::table('answers')
             ->select('subjects.s_title as subject_name', DB::raw('
                 SUM(CASE WHEN options.is_correct = 1 THEN 1 ELSE 0 END) AS right_answers,
                 SUM(CASE WHEN options.is_correct = 0 THEN 1 ELSE 0 END) AS wrong_answers
@@ -188,16 +203,16 @@ $subjects = DB::table('answers')
         $dateBangla = str_replace($month, DateHelper::toBengaliMonth($month), $formattedDate);
 
 
-return view('user.modeltest.allreadyresults', [
-'modelTest' => $modelTest,
-'userAnswers' => $userAnswers,
-'correctAnswers' => $correctAnswers,
-'course' => $course,
-'subjects' => $subjects,
-'totals'=>$totals,
-'dateBangla'=> $dateBangla
-]);
-}
+        return view('user.modeltest.allreadyresults', [
+        'modelTest' => $modelTest,
+        'userAnswers' => $userAnswers,
+        'correctAnswers' => $correctAnswers,
+        'course' => $course,
+        'subjects' => $subjects,
+        'totals'=>$totals,
+        'dateBangla'=> $dateBangla
+        ]);
+    }
 
 
 
@@ -409,5 +424,48 @@ return view('user.modeltest.allreadyresults', [
            
         return view('user.modeltest.markshet', compact('subjects','totals'));
     }
+
+
+
+
+    function examFree($course_slug,$modeltest_id) {
+
+        $course = Course::where('c_slug', $course_slug)->first();
+    
+        $user = Auth::user();
+        
+        // Check if the user is authenticated
+         if (!$user) {
+            return view('frontend.course', ['course' => $course,]);
+        }
+    
+        $modelTest = ModelTest::with('questions.question.options')->where('status',2)->findOrFail($modeltest_id);
+        
+    
+    
+       
+    
+    
+            //end subcribe
+    
+         // Check if the user has already submitted answers for this test
+        $userAnswers = Answer::where('user_id', auth()->id())
+        ->where('modeltest_id', $modeltest_id)
+        ->pluck('selected_option_id', 'question_id')
+        ->toArray();
+    
+        // If user has already submitted answers, redirect to results page
+       
+    
+    
+    
+        return view('user.modeltest.exam', compact('modelTest','course','course_slug'));
+    }
+    
+
+
+
+
+
     
 }

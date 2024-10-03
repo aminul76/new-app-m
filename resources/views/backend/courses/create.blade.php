@@ -54,10 +54,23 @@
         </div>
 
         <div class="form-group">
-            <label for="c_keyword">Keywords</label>
+            <label for="c_price">Keywords</label>
             <input type="text" class="form-control" id="c_keyword" name="c_keyword" value="{{ old('c_keyword') }}">
         </div>
 
+        <div class="form-group">
+            <label for="c_price">Price</label>
+            <input type="text" class="form-control" id="c_price" name="c_price" value="{{ old('c_price') }}">
+        </div>
+
+
+        
+        <div class="form-group">
+            <label for="c_subcribe_details"> subcribe details</label>
+            <textarea class="form-control" id="c_subcribe_details" name="c_subcribe_details">{{ old('c_subcribe_details') }}</textarea>
+        </div>
+
+    
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 @endsection

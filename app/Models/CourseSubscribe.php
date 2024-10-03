@@ -11,6 +11,8 @@ class CourseSubscribe extends Model
     protected $fillable = [
         'user_id',
         'course_id',
+        'mobile_number',
+        'transaction_id',
         'subscribed_at',
         'expires_at',
         'status',

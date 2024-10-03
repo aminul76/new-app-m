@@ -11,6 +11,7 @@
             <th class="border px-4 py-2">ID</th>
             <th class="border px-4 py-2">User</th>
             <th class="border px-4 py-2">Course</th>
+            <th class="border px-4 py-2">Number</th>
             <th class="border px-4 py-2">Subscribed At</th>
             <th class="border px-4 py-2">Expires At</th>
             <th class="border px-4 py-2">Status</th>
@@ -23,6 +24,9 @@
                 <td class="border px-4 py-2">{{ $subscription->id }}</td>
                 <td class="border px-4 py-2">{{ $subscription->user->name }}</td> <!-- Accessing user details -->
                 <td class="border px-4 py-2">{{ $subscription->course->c_title }}</td>
+
+                <td class="border px-4 py-2">{{ $subscription->mobile_number }}</td>
+
                 <td class="border px-4 py-2">{{ $subscription->subscribed_at ? $subscription->subscribed_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
                 <td class="border px-4 py-2">{{ $subscription->expires_at ? $subscription->expires_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
                 <td class="border px-4 py-2">{{ $subscription->status == 1 ? 'Active' : 'Deactivated' }}</td>

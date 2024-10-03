@@ -154,11 +154,7 @@
 
 
 <!-- Subscription Section -->
-<div class="subscription-section">
-<h2 class="subscription-title">Subscribe to our newsletter</h2>
-<button class="subscription-b-btn">Subscribe</button>
-</div>
-
+@include('frontend.include.subcribe')
 
 
 @include('frontend.include.coursefooter')

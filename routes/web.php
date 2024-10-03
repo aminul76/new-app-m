@@ -26,11 +26,13 @@ use App\Http\Controllers\Author\ResultController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ImportController;
 
-
+use App\Http\Controllers\Author\SubcribeController;
 
 Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/courses/{slug}', [FrontendController::class, 'courses'])->name('courses.index');
+
+Route::get('/{q_slug}', [FrontendController::class, 'singleQuestions'])->name('single.questions');
 
 Route::get('/courses/{courseSlug}/{subjectSlug}', [FrontendController::class, 'topic'])->name('courses.topic');
 
@@ -66,7 +68,19 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('author/mode-text/{course_slug}/{modeltest_id}/exam', [AuthorModeltest::class, 'examModel'])->name('author.mode-text.exam');
 
+
+Route::get('author/mode-text/{course_slug}/{modeltest_id}/free', [AuthorModeltest::class, 'examFree'])->name('author.mode-text.free');
+
+
+
 Route::get('author/merit-list/{course_slug}/{modeltest_id}', [ResultController::class, 'meritList'])->name('author.merit-list');
+
+
+Route::get('/author/subcribe/view/{id}', [SubcribeController::class, 'subcribe']);
+Route::get('/author/subcribe/tnxid/{id}', [SubcribeController::class, 'tnxid']);
+Route::post('/author/payment/store', [SubcribeController::class, 'payment'])->name('author.payment.store');
+
+
 
 // Ensure the namespace is correct and matches the controller file location
 Route::group([
@@ -78,6 +92,10 @@ Route::group([
     Route::get('dashboard', [AuthorDashboardController::class, 'index'])->name('dashboard');
     Route::post('/mode-text/{course_slug}/{modeltest_id}/submit', [AuthorModeltest::class, 'submitExam'])->name('mode-text.submit');
     Route::get('/markshet/{modeltestId}', [AuthorModeltest::class, 'showMarksheet']);
+   
+
+
+
 });
 
 

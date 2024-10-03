@@ -72,6 +72,15 @@
 
             </ul>
         </li>
+
+        <li>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0;">
+                  SingOUt
+                </button>
+            </form>
+        </li>
         {{-- <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li> --}}
 

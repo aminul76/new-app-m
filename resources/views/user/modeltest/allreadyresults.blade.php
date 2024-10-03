@@ -175,6 +175,7 @@
                                     </label>
                                 </div>
                             @endforeach
+                            <p>{{ $modelTestQuestion->question->q_explain }}</p>
                         </div>
                     </div>
                 @else

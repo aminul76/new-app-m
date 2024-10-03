@@ -69,15 +69,24 @@
             <div class="live-text">Live</div>
         </a>
 
-
-
+        @if (!$modelTest)
         <a href="#" class="category-card">
             <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
             <div class="card-content">
                 <h2 class="card-title">ফ্রি এক্সাম</h2>
             </div>
             <div class="live-text">Free</div>
-        </a>
+        </a> 
+        @else
+        <a href="{{ route('author.mode-text.free', [$course->c_slug, $modelTest->id]) }}" class="category-card">
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="card-content">
+                <h2 class="card-title">ফ্রি এক্সাম</h2>
+            </div>
+            <div class="live-text">Free</div>
+        </a> 
+        @endif
+       
 
       
 
@@ -217,10 +226,7 @@
 
 
     <!-- Subscription Section -->
-    <div class="subscription-section">
-        <h2 class="subscription-title">Subscribe to our newsletter</h2>
-        <button class="subscription-b-btn">Subscribe</button>
-    </div>
+    @include('frontend.include.subcribe')
 
 @include('frontend.include.coursefooter')
 

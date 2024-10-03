@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
             $table->foreignId('course_id')->constrained()->onDelete('cascade'); // Foreign key to courses table
+            $table->string('mobile_number')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->timestamp('subscribed_at')->nullable(); // Date of subscription
             $table->timestamp('expires_at')->nullable(); // Subscription expiry date (1 month after subscription)
             $table->tinyInteger('status')->default(2); // Status: 1 = active, 2 = deactivated

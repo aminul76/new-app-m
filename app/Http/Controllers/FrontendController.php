@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ModelTest;
 use App\Models\course;
 use App\Models\Topic;
 use App\Models\Question;
@@ -44,7 +45,10 @@ class FrontendController extends Controller
         ->where('course_subject.course_id', $course->id)
         ->get();
 
-    return view('frontend.course', ['course' => $course, 'subjects' => $subjects]);
+    $modelTest=ModelTest::where('status',2)->where('course_id', $course->id)
+    ->first();
+
+    return view('frontend.course', ['course' => $course, 'subjects' => $subjects,'modelTest' => $modelTest]);
 
    }
 
@@ -140,7 +144,7 @@ class FrontendController extends Controller
 
 // If no active subscription, show an error or redirect
     if (!$subscription) {
-        return redirect()->route('subscription.error')->with('error', 'Your subscription has expired or does not exist.');
+        return view('user.subcribe.subcribe', ['course' => $course,]);
     }
 
     $questions = Question::where('topic_id', $topic_id)
@@ -152,4 +156,27 @@ class FrontendController extends Controller
     
        return view('frontend.topic_question', compact('questions','course'));
    }
+
+
+   public function singleQuestions($q_slug)
+   {
+    $user = Auth::user();
+   
+
+    $question = Question::where('q_slug', $q_slug)
+            ->with('options')
+            ->first(); 
+
+     
+            if (!$question) {
+                return abort(404); // or use redirect()->route('your.not.found.page');
+            }
+    
+       return view('frontend.single_question', compact('question'));
+   }
+
+
+  
+
+   
 }

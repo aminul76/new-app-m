@@ -66,7 +66,7 @@
 
  
     </div>
-
+    @include('frontend.include.subcribe')
 @include('frontend.include.coursefooter')
 
 

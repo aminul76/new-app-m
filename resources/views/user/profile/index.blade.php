@@ -93,7 +93,17 @@ background-color: #0056b3;
 <main>
 
 
-
+    @php
+    $user = Auth::user();
+    use Carbon\Carbon;
+    $subscription = \App\Models\CourseSubscribe::where('user_id', $user->id)
+    ->where('course_id', $course->id)
+    ->where(function ($query) {
+        $query->whereNull('expires_at')
+              ->orWhere('expires_at', '>=', Carbon::now());
+    })
+    ->first();
+  @endphp
     <div class="routine-card">
 
         <div class="profile">
@@ -102,6 +112,14 @@ background-color: #0056b3;
                
                 <h1>Name: {{$user->name}}</h1>
                 <p>Eamail:{{$user->email}} </i></p>
+
+                @if ($subscription)
+                <h3>{{$course->c_title}} কোর্স একটিভ আছে</h3> 
+                @else
+                <h3>কোর্স একটিভ নাই</h3> 
+                @endif
+                
+
             </div>
         </div>
     </div>
@@ -187,7 +205,7 @@ background-color: #0056b3;
 </div>
 
 
-    
+@include('frontend.include.subcribe')
 @include('frontend.include.coursefooter')
 
 </main>

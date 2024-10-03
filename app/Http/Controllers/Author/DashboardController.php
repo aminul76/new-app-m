@@ -55,4 +55,8 @@ class DashboardController extends Controller
         return view('user.profile.index',compact('course','correct',
         'incorrect','totalmarks','totalCorrectAnswers','totalinCorrectAnswers','user'));
     }
+
+  
+
+
 }

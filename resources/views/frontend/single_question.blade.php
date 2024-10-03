@@ -1,30 +1,31 @@
 @extends('frontend.master')
 
-@section('seo')
+ @section('seo')
    <!-- General Meta Tags -->
-   <meta name="description" content="{{ $course->c_seo_description ?? $course->c_description }}">
-   <meta name="keywords" content="{{ $course->c_keyword }}">
+   <meta name="description" content="{{ $question->q_explain }}">
+   @php
+    $keywords = $question->options->pluck('p_title')->implode(', ');
+@endphp
+
+<meta name="keywords" content="{{ $keywords }}">
    
    <!-- Open Graph Meta Tags for Social Media -->
-   <meta property="og:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
-   <meta property="og:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
-   <meta property="og:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   <meta property="og:title" content="{{ $question->q_title}}">
+   <meta property="og:description" content="{{ $question->q_explain }}">
    <meta property="og:url" content="{{ url()->current() }}">
-   <meta property="og:type" content="course">
+   <meta property="og:type" content="question">
    <meta property="og:site_name" content="{{ config('app.name') }}">
    
    <!-- Twitter Card Meta Tags -->
    <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:title" content="{{ $course->c_seo_title ?? $course->c_title }}">
-   <meta name="twitter:description" content="{{ $course->c_seo_description ?? $course->c_description }}">
-   <meta name="twitter:image" content="{{ asset('images/courseimage/' . $course->c_seo_image) }}">
+   <meta name="twitter:title" content="{{ $question->q_title}}">
+   <meta name="twitter:description" content="{{ $question->q_explain }}">
    
    <!-- Favicon (Optional) -->
-   <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
    
    <!-- Title -->
-   <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
-@endsection
+   <title>{{ $question->q_title}}</title>  
+@endsection 
 
 @section('style')
     <style>
@@ -273,7 +274,7 @@ nav[role="navigation"] {
 </div>
 
 <main>
-    @foreach ($questions as $question)
+   
         <div class="question" id="question-{{ $question->id }}">
             <h4>{{ $question->q_title }}
             
@@ -291,7 +292,7 @@ nav[role="navigation"] {
                         class="option"
                         data-is-correct="{{ $option->is_correct }}"
                         onclick="handleOptionClick(this, {{ $question->id }}, {{ $option->is_correct }})">
-                        {!!$option->p_title !!}
+                        {!! $option->p_title !!}
                     </div>
                 @endforeach
             </div>
@@ -303,14 +304,13 @@ nav[role="navigation"] {
          
            
         </div>
-    @endforeach
   
-              {{ $questions->links() }}
+  
+            
            
   
 
 
-        
              
 
     

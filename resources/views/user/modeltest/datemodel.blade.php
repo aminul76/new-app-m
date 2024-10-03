@@ -52,6 +52,50 @@
         color: #fff;
     }
 
+
+
+    /* styles.css */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    
+    color: #ffff;
+    background: linear-gradient(25deg, #3a54d5, #ff0000);
+    border-radius: 21px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+.close-btn {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
 </style>
 @endsection
 
@@ -82,6 +126,15 @@
             ];
             $currentDate->addDay();
         }
+
+
+            if ($selectdateDate->isPast()) {
+            $message = "Time's up";
+            } elseif ($selectdateDate->isFuture()) {
+                $message = "Upcoming";
+            } else {
+                $message = "Ongoing"; // Optional: Handle case where the date is today
+            }
     @endphp
 
     <div class="day-header-container">
@@ -103,37 +156,40 @@
 
         <div class="exam-cards">
             @forelse ($modelTests as $modelTest)
-                <div class="exam-card">
-                    <div class="exam-details">
+            <div class="exam-card" data-title="{{ $modelTest->title }}" data-description="{{ $modelTest->m_description }}" data-times="Start Time: {{ \Carbon\Carbon::parse($modelTest->start_date)->format('g:i A') }} - End Time: {{ \Carbon\Carbon::parse($modelTest->end_date)->format('g:i A') }}" data-mark="{{ $modelTest->mark }}">
+                <div class="exam-details">
                         <div class="subject-header">
                             <h3 class="subject-name">
                                 <i class="fas fa-calendar-alt subject-icon"></i>
                                 {{ $modelTest->title }}
                             </h3>
-                            <div class="subject-mark">Marks: 100</div>
+                            <div class="subject-mark">{{$modelTest->mark}}</div>
                         </div>
                         <div class="topic-details">
-                            <p class="topic-name">
-                                <i class="fas fa-book topic-icon"></i> Algebra
-                            </p>
-                            <p class="points">Marks: 20</p>
+                            {!!$modelTest->m_description!!}
                         </div>
                         <p class="exam-date">
-                            <span class="exam-time">10:00 AM - 12:00 PM</span>
+                            <span> Start Time: {{ \Carbon\Carbon::parse($modelTest->start_date)->format('g:i A') }} -   End Time: {{ \Carbon\Carbon::parse($modelTest->end_date)->format('g:i A') }}</span>
                         </p>
                     </div>
                 </div>
                 @empty
-                <p>upcoming exam</p>
+                
                 @endforelse
         </div>
     </div>
 
-    <!-- Subscription Section -->
-    <div class="subscription-section">
-        <h2 class="subscription-title">Subscribe to our newsletter</h2>
-        <button class="subscription-b-btn">Subscribe</button>
+
+    <!-- Modal Structure -->
+    <div id="examModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>{{$message}}</h3>
+        </div>
     </div>
+    <!-- Subscription Section -->
+  
+    @include('frontend.include.subcribe')
 
     @include('frontend.include.coursefooter')
 
@@ -155,6 +211,41 @@
                 container.scrollLeft = scrollLeft;
             }
         });
+    </script>
+    <script>
+        // script.js
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("examModal");
+    var span = document.getElementsByClassName("close-btn")[0];
+
+    // Function to show the modal
+    function showModal() {
+        modal.style.display = "block";
+    }
+
+    // Get all exam cards
+    var examCards = document.querySelectorAll('.exam-card');
+
+    // Add click event listeners to all exam cards
+    examCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+            showModal();
+        });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
     </script>
     @endsection
 </main>

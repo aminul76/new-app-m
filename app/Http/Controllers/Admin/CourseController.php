@@ -51,6 +51,11 @@ class CourseController extends Controller
         $course->c_seo_title = $request->c_seo_title;
         $course->c_seo_description = $request->c_seo_description;
         $course->c_keyword = $request->c_keyword;
+        $course->c_subcribe_details = $request->c_subcribe_details;
+
+        $course->c_price = $request->c_price;
+
+        
     
         // Handle the main course image
         if ($request->hasFile('c_image')) {
@@ -127,6 +132,9 @@ class CourseController extends Controller
         $course->c_seo_title = $request->c_seo_title;
         $course->c_seo_description = $request->c_seo_description;
         $course->c_keyword = $request->c_keyword;
+        $course->c_subcribe_details = $request->c_subcribe_details;
+        $course->c_price = $request->c_price;
+        
     
         // Handle the main course image
         if ($request->hasFile('c_image')) {

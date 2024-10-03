@@ -19,6 +19,8 @@ class Course extends Model
         'c_seo_image',
         'c_seo_description',
         'c_keyword',
+        'c_subcribe_details',     
+        'c_price',
     ];
 
     /**

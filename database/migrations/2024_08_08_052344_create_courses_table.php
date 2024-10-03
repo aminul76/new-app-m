@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('c_seo_title')->nullable();
             $table->string('c_seo_image')->nullable();
             $table->string('c_seo_description')->nullable();
+            $table->text('c_subcribe_details')->nullable();
+            $table->string('c_price')->nullable();
+            
             $table->text('c_keyword')->nullable();
             $table->timestamps();
         });

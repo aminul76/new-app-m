@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->unsignedBigInteger('topic_id')->nullable();
             $table->unsignedBigInteger('import_id')->nullable();
-            $table->string('q_title')->nullable();
-            $table->string('q_slug')->nullable();
-            $table->text('q_explain')->nullable();
+            $table->longText('q_title')->nullable();
+            $table->text('q_slug')->nullable();
+            $table->longText('q_explain')->nullable();
             $table->timestamps();
             $table->foreign('import_id')->references('id')->on('imports')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
