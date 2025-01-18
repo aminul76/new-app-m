@@ -20,6 +20,13 @@ class QuestionController extends Controller
         return view('backend.questions.index', compact('questions'));
     }
 
+    public function searchForm()
+    {
+        $subjects = Subject::all(); // Get all subjects
+        $topics = Topic::all(); // Get all topics
+        return view('question.search', compact('subjects', 'topics'));
+    }
+
     // Show the form for creating a new question.
     public function create()
     {

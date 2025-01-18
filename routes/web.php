@@ -149,6 +149,9 @@ Route::group([
     Route::post('/fackuserimport', [FackuserController::class, 'fackuserimport'])->name('fackuser.import');
 
 
+    Route::get('/question/search', [QuestionController::class, 'searchForm'])->name('question.searchForm');
+    Route::get('/question/search/results', [QuestionController::class, 'search'])->name('question.search');
+
 });
 
 
