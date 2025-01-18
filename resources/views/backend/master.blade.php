@@ -11,7 +11,9 @@
      <link rel="stylesheet" type="text/css" href="{{ asset('plugins/jquery.dataTables.min.css') }}"/>
      <!-- DataTables JS -->
      <script type="text/javascript" charset="utf8" src="{{ asset('plugins/jquery.dataTables.min.js') }}"></script>
-</head>
+     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+     </script> 
+    </head>
 <body>
     @include('backend.include.sidebar')
     <div class="main-content">

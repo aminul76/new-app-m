@@ -23,7 +23,9 @@
    <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
    
    <!-- Title -->
-   <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
+   <title>{{ $course->c_seo_title ?? $course->c_title }}</title> 
+   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script> 
 @endsection
 
 @section('style')
@@ -262,20 +264,27 @@ nav[role="navigation"] {
     }
 }
     </style>
+
+
 @endsection
 
+
 @section('content')
+
+
+
+
 <div class="topic-header">
-    <button class="back-button" onclick="javascript:history.back()">
-      <span>&#x2190;</span> <!-- Left arrow for back -->
-    </button>
+    <button class="back-button" onclick="window.location.href='{{ url('/courses/' . urlencode($course->c_slug) . '/' . urlencode($subject->s_slug)) }}'">
+    <span>&#x2190;</span> <!-- Left arrow for back -->
+</button>
     <h2 class="topic-title">প্রশ্ন</h2>
 </div>
 
 <main>
     @foreach ($questions as $question)
         <div class="question" id="question-{{ $question->id }}">
-            <h4>{{ $question->q_title }}
+            <h4>{!! $question->q_title !!}
             
             @foreach ($question->exams as $exam)
                <i> - {{ $exam->e_title }}
@@ -291,7 +300,7 @@ nav[role="navigation"] {
                         class="option"
                         data-is-correct="{{ $option->is_correct }}"
                         onclick="handleOptionClick(this, {{ $question->id }}, {{ $option->is_correct }})">
-                        {!!$option->p_title !!}
+                        {!!$option->p_title!!}
                     </div>
                 @endforeach
             </div>

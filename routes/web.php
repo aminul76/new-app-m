@@ -28,6 +28,9 @@ use App\Http\Controllers\ImportController;
 
 use App\Http\Controllers\Author\SubcribeController;
 
+Auth::routes();
+
+
 Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/courses/{slug}', [FrontendController::class, 'courses'])->name('courses.index');
@@ -62,7 +65,6 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Route::post('/ajax-login', [LoginController::class, 'ajaxLogin']);
 
-Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

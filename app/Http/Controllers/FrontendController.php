@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ModelTest;
 use App\Models\course;
 use App\Models\Topic;
+use App\Models\Subject;
 use App\Models\Question;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -129,6 +130,9 @@ class FrontendController extends Controller
    {
     $user = Auth::user();
     $course = Course::where('id', $course_id)->first();
+    $topic = Topic::where('id', $topic_id)->first();
+    $subject = Subject::where('id', $topic->subject_id)->first();
+   
     // Check if the user is authenticated
     if (!$user) {
         return view('frontend.course', ['course' => $course,]);
@@ -154,7 +158,7 @@ class FrontendController extends Controller
      
            
     
-       return view('frontend.topic_question', compact('questions','course'));
+       return view('frontend.topic_question', compact('questions','course','subject'));
    }
 
 

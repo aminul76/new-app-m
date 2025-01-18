@@ -76,6 +76,8 @@ class QuestionController extends Controller
     // Update the specified question in the database.
     public function update(Request $request, Question $question)
     {
+
+       
         $data = $request->validate([
             'subject_id' => 'required|exists:subjects,id',
             'topic_id' => 'required|exists:topics,id',
@@ -88,13 +90,14 @@ class QuestionController extends Controller
             'exams.*' => 'exists:exams,id',
          ]);
 
+       
     $question->update($data);
 
     // Sync the selected years
     $question->years()->sync($data['years']);
     $question->exams()->sync($data['exams']);
 
-        return redirect()->route('admin.questions.index')->with('success', 'Question updated successfully.');
+        return redirect()->back()->with('success', 'Question updated successfully.');
     }
 
     // Remove the specified question from the database.

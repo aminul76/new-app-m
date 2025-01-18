@@ -23,7 +23,7 @@
         <div class="form-container">
 
 
-            {{-- <form id="loginForm">
+            <form id="loginForm">
                 @csrf
                 <div>
                     <label for="email">Email:</label>
@@ -35,7 +35,7 @@
                 </div>
                 <button type="submit">Login</button>
 
-            </form> --}}
+            </form>
             <div class="google-signin">
                 <a href="{{ url('auth/google') }}" class="google-button">
                     <i class="fab fa-google google-icon"></i> Sign in with Google

@@ -59,7 +59,7 @@ class ImportLabalController extends Controller
 
             $questions = DB::table('questions')
             ->join('options', 'options.question_id', '=', 'questions.id')
-            ->select('questions.id as question_id', 'questions.q_title','questions.subject_id', 'options.p_title')
+            ->select('questions.id as question_id','questions.topic_id', 'questions.q_title','questions.subject_id', 'options.p_title','options.is_correct')
             ->where('questions.import_id', $id)
             ->get();
 
@@ -97,7 +97,7 @@ class ImportLabalController extends Controller
 
         public function LabelSubjectTopic(Request $request){
 
-            $questions=Question::where('subject_id',);
+            $questions=Question::where('import_id',$id);
 
             $topic = Topic::find($request->subject_id);
             $label = Import::with('questions.options')->find($request->id);
@@ -113,6 +113,7 @@ class ImportLabalController extends Controller
                 'topics.*' => 'required|exists:topics,id',
             ]);
 
+            
             foreach ($validatedData['topics'] as $questionId => $topicId) {
                 // Find the question by ID and update the topic_id
                 $question = Question::find($questionId);

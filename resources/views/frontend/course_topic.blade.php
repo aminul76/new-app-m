@@ -34,8 +34,8 @@
 @section('content')
 
 <div class="topic-header">
-    <button class="back-button" onclick="javascript:history.back()">
-      <span>&#x2190;</span> <!-- Left arrow for back -->
+    <button class="back-button" onclick="window.location.href='{{ url('/courses', $course->c_slug) }}'">
+        <span>&#x2190;</span> <!-- Left arrow for back -->
     </button>
     <h2 class="topic-title">অনুশীলন</h2>
   </div>
