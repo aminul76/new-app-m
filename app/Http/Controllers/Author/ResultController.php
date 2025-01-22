@@ -17,7 +17,7 @@ class ResultController extends Controller
 {
     public function modelresultlist($course_slug){
 
-
+           
         $user = Auth::user();
         
         // Check if the user is authenticated
@@ -26,7 +26,8 @@ class ResultController extends Controller
         $course = Course::where('c_slug', $course_slug)->first();
 
         if (!$user) {
-            return view('frontend.course', ['course' => $course,]);
+           
+            return view('user.result.index',compact('course'));
         }
 
 

@@ -30,9 +30,7 @@ class AuthorModeltest extends Controller
     
         $course = Course::where('c_slug', $courseSlug)->first();
 
-        if (!$user) {
-            return view('frontend.course', ['course' => $course,]);
-        }
+      
 
         $currentDate = Carbon::now();
        
@@ -435,9 +433,7 @@ class AuthorModeltest extends Controller
         $user = Auth::user();
         
         // Check if the user is authenticated
-         if (!$user) {
-            return view('frontend.course', ['course' => $course,]);
-        }
+       
     
         $modelTest = ModelTest::with('questions.question.options')->where('status',2)->findOrFail($modeltest_id);
         

@@ -1,7 +1,7 @@
     <!-- Subscription Section -->
     
     
-  @php
+  {{-- @php
     $user = Auth::user();
     use Carbon\Carbon;
     $subscription = \App\Models\CourseSubscribe::where('user_id', $user->id)
@@ -20,5 +20,5 @@
     <a href="{{ url('author/subcribe/view',$course->id) }}" class="subscription-b-btn" >Enroll</a>
 </div> 
 @endif
-   
+    --}}
     <!-- Subscription Section end -->

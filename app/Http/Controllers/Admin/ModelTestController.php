@@ -38,6 +38,7 @@ class ModelTestController extends Controller
             'status' => 'required|integer',
             'm_description' => 'required',
             'mark' => 'required|string|max:255',
+            'set_time' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
@@ -71,6 +72,7 @@ class ModelTestController extends Controller
             'm_description' => 'required',
             'mark' => 'required|string|max:255',
             'status' => 'required|integer',
+            'set_time' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);

@@ -6,6 +6,7 @@
     <form action="{{ route('admin.questions.update', $question->id) }}" method="POST">
         @csrf
         @method('PUT')
+       
 
         <label for="subject_id">Subject:</label>
         <select name="subject_id" id="subject_id" required>

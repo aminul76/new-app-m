@@ -670,12 +670,16 @@ td {
   </div>
   <div class="method">
     <div> 
-        <br>
+       
         <form id="paymentForm" action="{{ route('author.payment.store') }}" method="POST">
           @csrf
 
           <input type="hidden" name="course_id" value="{{$course->id}}">
 
+@guest
+<label for="number">Enter Gmail</label>
+<input class="bg1" type="email"placeholder="Enter Gmail" name="email" /> 
+@endguest
         <label for="number">নিচে আপনার মোবাইল মোবাইল নাম্বার লিখুন</label>
         <input 
         class="bg2"

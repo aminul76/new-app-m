@@ -45,14 +45,14 @@
     border: 2px solid #062ba3; /* Optional border to make it more prominent */
 }
 
-.active-date::after {
-    content: "✓"; /* Optional: add a checkmark or any other icon to indicate active */
+/* .active-date::after {
+    content: "✓"; 
     position: absolute;
-    bottom: -10px; /* Position it below the circle */
+    bottom: -10px;
     right: -10px;
     font-size: 16px;
     color: #fff;
-}
+} */
 
 
 </style>
@@ -109,9 +109,8 @@
 
         <div class="exam-cards">
             @foreach ($modelTests as $modelTest)
-                
-            
-            <a href="{{ route('author.mode-text.exam', [$course->c_slug, $modelTest->id]) }}" class="exam-card">
+               @auth
+               <a href="{{ route('author.mode-text.exam', [$course->c_slug, $modelTest->id]) }}" class="exam-card">
                 <div class="live-text">Live</div>
                 <div class="exam-details">
                     <div class="subject-header">
@@ -134,6 +133,34 @@
                     </p>
                 </div>
             </a>
+               @endauth 
+             
+               @guest
+               <a href="{{ url('/profile', $course->c_slug) }}" class="exam-card">
+                <div class="live-text">Live</div>
+                <div class="exam-details">
+                    <div class="subject-header">
+                        <h3 class="subject-name">
+                            <i class="fas fa-calendar-alt subject-icon"></i>
+                           {{$modelTest->title}}
+                        </h3>
+                        <div class="subject-mark">Marks: {{$modelTest->mark}}</div>
+                    </div>
+                    <div class="topic-details">
+                       
+                          {!!$modelTest->m_description!!}
+                        
+                        
+                       
+                    </div>
+                    <p class="exam-date">
+                       
+                        <span> Start Time: {{ \Carbon\Carbon::parse($modelTest->start_date)->format('g:i A') }} -   End Time: {{ \Carbon\Carbon::parse($modelTest->end_date)->format('g:i A') }}</span>
+                    </p>
+                </div>
+            </a>
+               @endguest
+           
             @endforeach
             <!-- Add more exam cards as needed -->
         </div>
@@ -156,8 +183,8 @@
 <!-- Subscription Section -->
 @include('frontend.include.subcribe')
 
-
 @include('frontend.include.coursefooter')
+
 
 @section('js')
 <script>

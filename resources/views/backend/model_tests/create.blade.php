@@ -33,6 +33,12 @@
             <label for="mark">Mark</label>
             <input type="text" id="mark" name="mark" class="form-control" maxlength="255" required>
         </div>
+
+        <div class="form-group">
+            <label for="set_time">set_time</label>
+            <input type="text" id="set_time" name="set_time" class="form-control"  required>
+        </div>
+        
         <div>
             <label for="start_date">Start Date</label>
             <input type="datetime-local" name="start_date" id="start_date" value="{{ old('start_date') }}">

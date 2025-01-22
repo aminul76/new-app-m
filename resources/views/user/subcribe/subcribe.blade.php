@@ -1,4 +1,4 @@
-@auth
+
 @extends('frontend.master')
 
 @section('style')
@@ -243,7 +243,7 @@ h2 {
 
 
 @endsection
-@endauth
+{{-- @endauth
 @guest
 <!DOCTYPE html>
 <html lang="en">
@@ -291,10 +291,9 @@ h2 {
         {{-- <a href="{{url('/')}}" class="back-button">
             <i class="fas fa-arrow-left"></i> Back
         </a> --}}
-     
+{{--      
         <div class="form-container">
-            <h1>সাইন একাউন্ট</h1>
-
+            <h1>সাইন একাউন্ট</h1> --}}
             {{-- <form id="loginForm">
                 @csrf
                 <div>
@@ -308,7 +307,7 @@ h2 {
                 <button type="submit">Login</button>
 
             </form> --}}
-            <div class="google-signin">
+            {{-- <div class="google-signin">
                 <a href="{{ url('auth/google') }}" class="google-button">
                     <i class="fab fa-google google-icon"></i> Sign in with Google
                 </a>
@@ -351,4 +350,4 @@ h2 {
 @endguest
 
 
-
+ --}}

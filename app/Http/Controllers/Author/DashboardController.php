@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\User;
 use App\Models\UserExamRecord;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -24,7 +25,8 @@ class DashboardController extends Controller
         $course = Course::where('c_slug', $course_slug)->first();
 
         if (!$user) {
-            return view('frontend.course', ['course' => $course,]);
+           
+            return view('user.profile.index', ['course' => $course,]);
         }
         
         $totalCorrectAnswers = UserExamRecord::where('user_id', $user->id)
@@ -52,8 +54,18 @@ class DashboardController extends Controller
         }
 
        
+        
+        $subscription = \App\Models\CourseSubscribe::where('user_id', $user->id)
+        ->where('course_id', $course->id)
+        ->where(function ($query) {
+            $query->whereNull('expires_at')
+                  ->orWhere('expires_at', '>=', Carbon::now());
+        })
+        ->first();
+
+       
         return view('user.profile.index',compact('course','correct',
-        'incorrect','totalmarks','totalCorrectAnswers','totalinCorrectAnswers','user'));
+        'incorrect','totalmarks','totalCorrectAnswers','totalinCorrectAnswers','user','subscription'));
     }
 
   

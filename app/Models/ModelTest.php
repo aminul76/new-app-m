@@ -15,6 +15,7 @@ class ModelTest extends Model
         'status',
         'm_description',
         'mark',
+        'set_time',
         'start_date',
         'end_date',
     ];

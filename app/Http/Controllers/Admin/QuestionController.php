@@ -24,7 +24,54 @@ class QuestionController extends Controller
     {
         $subjects = Subject::all(); // Get all subjects
         $topics = Topic::all(); // Get all topics
-        return view('question.search', compact('subjects', 'topics'));
+        return view('backend.questions.search', compact('subjects', 'topics'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = Question::query();
+
+        // Apply filters if provided
+        if ($request->filled('subject_id')) {
+            $query->where('subject_id', $request->subject_id);
+        }
+
+        if ($request->filled('topic_id')) {
+            $query->where('topic_id', $request->topic_id);
+        }
+
+        if ($request->filled('q_title')) {
+            $query->where('q_title', 'like', '%' . $request->q_title . '%');
+        }
+
+        $questions = $query->paginate(40);
+        $subjects = Subject::all(); // Get all subjects for the filter
+        $topics = Topic::all(); // Get all topics for the filter
+
+        return view('backend.questions.search', compact('questions', 'subjects', 'topics'));
+    }
+
+    public function bulkUpdate(Request $request)
+    {
+      
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'questions.*.subject_id' => 'required|exists:subjects,id',
+            'questions.*.topic_id' => 'required|exists:topics,id',
+        ]);
+
+        // Iterate over each question in the array and update it
+        foreach ($validatedData['questions'] as $questionId => $data) {
+            $question = Question::findOrFail($questionId);
+            $question->update([
+                'subject_id' => $data['subject_id'],
+                //'subject_id' =>2,
+                'topic_id' => $data['topic_id'],
+            ]);
+        }
+
+        // Redirect back with success message
+        return redirect()->route('admin.questions.index')->with('success', 'Questions updated successfully!');
     }
 
     // Show the form for creating a new question.

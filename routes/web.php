@@ -30,6 +30,12 @@ use App\Http\Controllers\Author\SubcribeController;
 
 Auth::routes();
 
+use App\Models\Topic;
+
+Route::get('/get-topics/get-t/get-s/s/p/{subjectId}', function ($subjectId) {
+    $topics = Topic::where('subject_id', $subjectId)->get();
+    return response()->json(['topics' => $topics]);
+});
 
 Route::get('/', [FrontendController::class, 'index']);
 
@@ -151,6 +157,9 @@ Route::group([
 
     Route::get('/question/search', [QuestionController::class, 'searchForm'])->name('question.searchForm');
     Route::get('/question/search/results', [QuestionController::class, 'search'])->name('question.search');
+
+    Route::put('/questions/bulk-update/update', [QuestionController::class, 'bulkUpdate'])->name('questions.bulkUpdate.update');
+  
 
 });
 

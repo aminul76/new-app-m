@@ -5,6 +5,10 @@
 
     <a href="{{ route('admin.questions.create') }}" style="margin-bottom: 20px; display: inline-block;">Create New Question</a>
 
+<br>
+    <a href="{{ route('admin.question.searchForm') }}" style="margin-bottom: 20px; display: inline-block;"> Question Surch</a>
+
+
     @if (session('success'))
         <div style="color: green;">
             {{ session('success') }}

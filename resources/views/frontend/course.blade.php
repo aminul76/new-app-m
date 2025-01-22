@@ -1,4 +1,4 @@
-@auth
+{{-- @auth --}}
 @extends('frontend.master')
 
 
@@ -85,7 +85,7 @@
             </div>
             <div class="live-text">Free</div>
         </a> 
-        @endif
+        @endif 
        
 
       
@@ -237,7 +237,7 @@
 
 
 @endsection
-@endauth
+{{-- @endauth
 @guest
 <!DOCTYPE html>
 <html lang="en">
@@ -286,8 +286,8 @@
             <i class="fas fa-arrow-left"></i> Back
         </a> --}}
      
-        <div class="form-container">
-            <h1>সাইন একাউন্ট</h1>
+        {{-- <div class="form-container">
+            <h1>সাইন একাউন্ট</h1> --}}
 
             {{-- <form id="loginForm">
                 @csrf
@@ -302,7 +302,7 @@
                 <button type="submit">Login</button>
 
             </form> --}}
-            <div class="google-signin">
+            {{-- <div class="google-signin">
                 <a href="{{ url('auth/google') }}" class="google-button">
                     <i class="fab fa-google google-icon"></i> Sign in with Google
                 </a>
@@ -342,5 +342,5 @@
 
 </html>
 
-@endguest
+@endguest --}}
 

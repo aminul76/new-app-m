@@ -16,7 +16,7 @@
     @endif
 
     <!-- Search Form -->
-    <form action="{{ route('question.search') }}" method="GET">
+    <form action="{{ route('admin.question.search') }}" method="GET">
         <div class="form-group">
             <label for="subject_id">Select Subject</label>
             <select class="form-control" id="subject_id" name="subject_id">
@@ -63,25 +63,81 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($questions as $question)
-                    <tr>
-                        <td>{{ $question->id }}</td>
-                        <td>{{ $question->q_title }}</td>
-                        <td>{{ $question->subject->s_title }}</td>
-                        <td>{{ $question->topic->t_title }}</td>
-                        <td>
-                            <a href="{{ route('question.edit', $question->id) }}" class="btn btn-info">Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
+                <form action="{{ route('admin.questions.bulkUpdate.update') }}" method="POST">
+                    @csrf
+                    @method('PUT') <!-- Add this to make the form a PUT request -->
+                    
+                    @foreach ($questions as $question)
+                    <td>{{ $question->id }}</td>
+    <td>{{ $question->q_title }}</td>
+                    <td>
+                        <label for="subject_id_{{ $question->id }}">Subject:</label>
+                        <select name="questions[{{ $question->id }}][subject_id]" id="subject_id_{{ $question->id }}" class="subject-select" data-question-id="{{ $question->id }}" required>
+                            <option value="">Select a Subject</option>
+                            @foreach($subjects as $subject)
+                                <option value="{{ $subject->id }}" {{ $question->subject_id == $subject->id ? 'selected' : '' }}>
+                                    {{ $subject->s_title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <label for="topic_id_{{ $question->id }}">Topic:</label>
+                        <select name="questions[{{ $question->id }}][topic_id]" id="topic_id_{{ $question->id }}" required>
+                            <option value="">Select a Topic</option>
+                            @foreach($topics as $topic)
+                                @if ($topic->subject_id == $question->subject_id)
+                                    <option value="{{ $topic->id }}" {{ $question->topic_id == $topic->id ? 'selected' : '' }}>
+                                        {{ $topic->t_title }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </td>
+                            <td>
+                               
+                            </td>
+                        </tr>
+                    @endforeach
+                
+                    <button type="submit">Update All</button>
+                </form>
             </tbody>
         </table>
     @else
-        @if(request()->isMethod('get') && count($questions) === 0)
-            <div class="alert alert-warning mt-4">
-                No results found for your search.
-            </div>
-        @endif
+      
     @endif
 </div>
+
+
+<script>
+    // Function to update the topics based on the selected subject
+    document.addEventListener("DOMContentLoaded", function () {
+        // When subject is selected
+        document.querySelectorAll('.subject-select').forEach(function (select) {
+            select.addEventListener('change', function () {
+                const questionId = this.getAttribute('data-question-id');
+                const subjectId = this.value;
+                const topicSelect = document.getElementById('topic_id_' + questionId);
+
+                // Fetch topics for the selected subject via AJAX
+                if (subjectId) {
+                    fetch(`/get-topics/get-t/get-s/s/p/${subjectId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let options = '<option value="">Select a Topic</option>';
+                            data.topics.forEach(function (topic) {
+                                options += `<option value="${topic.id}">${topic.t_title}</option>`;
+                            });
+                            topicSelect.innerHTML = options;
+                        })
+                        .catch(error => console.error('Error fetching topics:', error));
+                } else {
+                    topicSelect.innerHTML = '<option value="">Select a Topic</option>';
+                }
+            });
+        });
+    });
+</script>
+
 @endsection

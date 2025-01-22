@@ -35,6 +35,11 @@
             <input type="text" id="mark" name="mark" class="form-control" maxlength="255" value="{{ old('mark', $modelTest->mark) }}" required>
         </div>
 
+        <div class="form-group">
+            <label for="set_time">set_time</label>
+            <input type="text" id="set_time" name="set_time" class="form-control" maxlength="255" value="{{ old('set_time', $modelTest->set_time) }}" required>
+        </div>
+
         <div>
             <label for="status">Status</label>
             <input type="number" name="status" id="status" value="{{ old('status', $modelTest->status) }}">

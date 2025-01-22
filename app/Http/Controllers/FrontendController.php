@@ -73,9 +73,12 @@ class FrontendController extends Controller
             
        // Check if the user is authenticated
         if (!$user) {
-            return view('frontend.course', ['course' => $course,]);
+           
         }
-
+        if (!$user) {
+            $subscription=0;
+        }
+        else{
        $subscription = CourseSubscribe::where('user_id', $user->id)
        ->where('course_id', $course->id)
        ->where(function ($query) {
@@ -83,6 +86,7 @@ class FrontendController extends Controller
                ->orWhere('expires_at', '>=', Carbon::now());
        })
        ->first();
+     }
 
   
 
@@ -128,6 +132,9 @@ class FrontendController extends Controller
 
    public function showQuestions($course_id,$topic_id)
    {
+
+
+   
     $user = Auth::user();
     $course = Course::where('id', $course_id)->first();
     $topic = Topic::where('id', $topic_id)->first();
@@ -135,7 +142,7 @@ class FrontendController extends Controller
    
     // Check if the user is authenticated
     if (!$user) {
-        return view('frontend.course', ['course' => $course,]);
+        return view('user.subcribe.subcribe', ['course' => $course,]);
     }
 
     $subscription = CourseSubscribe::where('user_id', $user->id)

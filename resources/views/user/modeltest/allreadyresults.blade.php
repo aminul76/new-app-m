@@ -158,7 +158,7 @@
             @foreach ($modelTest->modelTestQuestions as $modelTestQuestion)
                 @if ($modelTestQuestion->question)
                     <div class="mb-4">
-                        <h4>{{ $modelTestQuestion->question->q_title }}</h4>
+                        <h4>{!! $modelTestQuestion->question->q_title !!}</h4>
                         <div>
                             @foreach ($modelTestQuestion->question->options as $option)
                                 @php
@@ -171,11 +171,11 @@
                                     <input type="radio" disabled {{ $isUserAnswer ? 'checked' : '' }}>
                                     <label
                                         class="{{ $isUserAnswer ? ($isCorrectAnswer ? 'option-correct' : 'option-wrong') : ($isCorrectAnswer ? 'text-success' : '') }}">
-                                        {{ $option->p_title }}
+                                        {!! $option->p_title !!}
                                     </label>
                                 </div>
                             @endforeach
-                            <p>{{ $modelTestQuestion->question->q_explain }}</p>
+                            <p>{!!$modelTestQuestion->question->q_explain !!}</p>
                         </div>
                     </div>
                 @else
