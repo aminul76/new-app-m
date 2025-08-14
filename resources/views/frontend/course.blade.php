@@ -69,23 +69,15 @@
             <div class="live-text">Live</div>
         </a>
 
-        @if (!$modelTest)
-        <a href="#" class="category-card">
-            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+        <a href="{{ url('/video-view/current', $course->c_slug) }}" class="category-card">
+            <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
             <div class="card-content">
-                <h2 class="card-title">ফ্রি এক্সাম</h2>
+                <h2 class="card-title">ভিডিও ক্লাস</h2>
             </div>
-            <div class="live-text">Free</div>
-        </a> 
-        @else
-        <a href="{{ route('author.mode-text.free', [$course->c_slug, $modelTest->id]) }}" class="category-card">
-            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-            <div class="card-content">
-                <h2 class="card-title">ফ্রি এক্সাম</h2>
-            </div>
-            <div class="live-text">Free</div>
-        </a> 
-        @endif 
+            <div class="live-text">Live</div>
+        </a>
+
+       
        
 
       

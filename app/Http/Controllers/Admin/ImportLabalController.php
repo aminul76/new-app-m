@@ -95,6 +95,72 @@ class ImportLabalController extends Controller
             return view('backend.import.label.subject', compact('subjects','id','questions','topics','topicStatus'));
         }
 
+
+           public function LabelSubjectSingle($id)
+        {
+            $subjects=Subject::all();
+
+            $subject = Subject::find($id);
+
+            // $questions = DB::table('questions')
+            // ->join('options', 'options.question_id', '=', 'questions.id')
+            // ->join('imports', 'imports.id', '=', 'questions.import_id')
+            // ->join('subjects', 'subjects.id', '=', 'questions.subject_id')
+            // ->join('topics', 'subjects.id', '=', 'topics.subject_id')
+            // ->select('questions.q_title','options.p_title')
+
+            // ->get();
+
+            // $questions = DB::table('questions')
+            // ->join('options', 'options.question_id', '=', 'questions.id')
+            // ->join('imports', 'imports.id', '=', 'questions.import_id')
+            // ->join('subjects', 'subjects.id', '=', 'questions.subject_id')
+            // ->join('topics', 'topics.subject_id', '=', 'subjects.id') // Corrected join condition
+            // ->select('questions.id as question_id', 'questions.q_title', 'options.p_title', 'topics.id as topic_id', 'topics.t_title')
+            // ->where('questions.import_id', $id)
+            // ->get();
+
+
+
+            $questions = DB::table('questions')
+            ->join('options', 'options.question_id', '=', 'questions.id')
+            ->select('questions.id as question_id','questions.topic_id', 'questions.q_title','questions.subject_id', 'options.p_title','options.is_correct')
+            ->where('questions.import_id', $id)
+            ->get();
+
+            $firstQuestionSubjectId = null;
+            if ($questions->isNotEmpty()) {
+                $firstQuestion = $questions->first();
+                $firstQuestionSubjectId = $firstQuestion->subject_id;
+            }
+
+            $questiontopicstats=Question::where('import_id',$id)->first();
+
+             if($questiontopicstats->topic_id !=null){
+                $topicStatus=1;
+             }
+             else{
+                $topicStatus=0;
+             }
+
+
+        $topics = DB::table('topics')->where('subject_id',$firstQuestionSubjectId)->get(); // Fetch topics for the dropdown
+
+
+            // Fetch questions and options using joins
+            // $questions = DB::table('questions')
+            //     ->join('options', 'questions.id', '=', 'options.question_id')
+            //     ->select('questions.id as question_id', 'questions.q_title as question_text',
+            //              'options.id as option_id', 'options.p_title as option_text')
+            //     ->where('questions.subject_id', $subject_id)
+            //     ->get()
+            //     ->groupBy('question_id');
+
+
+            return view('backend.import.label.subjectsingle', compact('subjects','id','questions','topics','topicStatus'));
+        }
+
+
         public function LabelSubjectTopic(Request $request){
 
             $questions=Question::where('import_id',$id);
@@ -127,5 +193,30 @@ class ImportLabalController extends Controller
 
             return redirect()->back()->with('success', 'Topics updated successfully.');
         }
+
+         public function storeTopicsSingle(Request $request)
+            {
+                // Validate the request
+                $validatedData = $request->validate([
+                    'topics' => 'required|array',
+                    'topics.*' => 'required|exists:topics,id',
+                ]);
+
+                // Get the first topic_id from the array
+                $firstTopicId = reset($validatedData['topics']);
+
+                // Apply this topic_id to all question IDs (keys of the array)
+                foreach (array_keys($validatedData['topics']) as $questionId) {
+                    $question = Question::find($questionId);
+                    if ($question) {
+                        $question->topic_id = $firstTopicId;
+                        $question->save();
+                    }
+                }
+
+                return redirect()->back()->with('success', 'All questions updated with the first selected topic.');
+            }
+
+
 
 }

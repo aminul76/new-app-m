@@ -21,6 +21,8 @@ class ModelTestQuestion extends Model
      *
      * @var array
      */
+
+   
     protected $fillable = [
         'model_test_id',
         'subject_id',

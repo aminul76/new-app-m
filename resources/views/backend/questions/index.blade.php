@@ -30,7 +30,7 @@
             @foreach ($questions as $question)
                 <tr>
                     <td>{{ $question->id }}</td>
-                    <td>{{ $question->q_title }}</td>
+                    <td><a href="{{route('admin.single.questions',['q_slug' => $question->q_slug])}}" target="_blank">{{ $question->q_title }}</a></td>
                     <td>{{ $question->q_slug }}</td>
                     <td>{{ $question->subject->s_title ?? 'N/A' }}</td>
                     <td>{{ $question->topic->t_title ?? 'N/A' }}</td>

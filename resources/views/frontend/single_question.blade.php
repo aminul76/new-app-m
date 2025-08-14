@@ -279,7 +279,7 @@ nav[role="navigation"] {
             <h4>{{ $question->q_title }}
             
             @foreach ($question->exams as $exam)
-               <i> - {{ $exam->e_title }}
+               <i style="color:#3a7bd5"> - {{ $exam->e_title }}
             @endforeach
             @foreach ($question->years as $year)
            

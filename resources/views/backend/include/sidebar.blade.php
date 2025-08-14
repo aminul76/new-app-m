@@ -42,6 +42,18 @@
             </ul>
         </li>
 
+        
+        <li>
+            <a href="">Video</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.videos.index') }}">Video</a></li>
+
+
+            </ul>
+        </li>
+
+
+
 
         
         <li>

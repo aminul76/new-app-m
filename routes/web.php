@@ -28,6 +28,8 @@ use App\Http\Controllers\ImportController;
 
 use App\Http\Controllers\Author\SubcribeController;
 
+use App\Http\Controllers\Admin\VideoController;
+
 Auth::routes();
 
 use App\Models\Topic;
@@ -51,6 +53,16 @@ Route::get('/topics/{course_id}/{topic_id}/questions', [FrontendController::clas
 
 Route::get('/model-tests/current/{courseSlug}', [AuthorModeltest::class, 'current'])->name('model-tests.current');
 Route::get('/model-tests/{courseSlug}/{date}', [AuthorModeltest::class, 'dateModelTest'])->name('model-tests.date');
+
+
+
+Route::get('/video-view/current/{courseSlug}', [AuthorModeltest::class, 'videocurrent'])->name('video-view.current');
+Route::get('/video-view/{courseSlug}/{date}', [AuthorModeltest::class, 'datevideo'])->name('video-view.date');
+
+Route::get('/video-play/{courseSlug}/{id}', [AuthorModeltest::class, 'playvideo'])->name('video-play.play');
+
+
+
 
 
 Route::get('/modelresultlist/{course_slug}', [ResultController::class, 'modelresultlist'])->name('modelresultlist');
@@ -77,6 +89,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('author/mode-text/{course_slug}/{modeltest_id}/exam', [AuthorModeltest::class, 'examModel'])->name('author.mode-text.exam');
 
 
+Route::get('author/mode-text/{course_slug}/{modeltest_id}/resultlist', [AuthorModeltest::class, 'resultlist'])->name('author.mode-text.resultlist');
+
+
+
 Route::get('author/mode-text/{course_slug}/{modeltest_id}/free', [AuthorModeltest::class, 'examFree'])->name('author.mode-text.free');
 
 
@@ -87,6 +103,7 @@ Route::get('author/merit-list/{course_slug}/{modeltest_id}', [ResultController::
 Route::get('/author/subcribe/view/{id}', [SubcribeController::class, 'subcribe']);
 Route::get('/author/subcribe/tnxid/{id}', [SubcribeController::class, 'tnxid']);
 Route::post('/author/payment/store', [SubcribeController::class, 'payment'])->name('author.payment.store');
+
 
 
 
@@ -130,6 +147,18 @@ Route::group([
     Route::resource('course-subject', CourseSubjectController::class);
     Route::resource('course-topic', CourseTopicController::class);
     Route::resource('course-subscribes', CourseSubscribeController::class);
+
+    Route::resource('videos', VideoController::class);
+
+    Route::get('/videosday/editall/{id}', [VideoController::class, 'editAll'])->name('admin.videos.editall');
+    Route::post('/videos/update-all', [VideoController::class, 'updateAll'])->name('videos.update_all');
+
+
+    Route::get('/modeltest/editall/{id}', [ModelTestController::class, 'editAll'])->name('admin.modeltest.editall');
+    Route::post('/modeltest/update-all', [ModelTestController::class, 'updateAll'])->name('modeltest.update_all');
+
+
+
     //import
     Route::get('year-exam-index', [QuestionImortConroller::class, 'YearExamIndex'])->name('yearexam.index');
     Route::post('year-exam-index', [QuestionImortConroller::class, 'YearExam'])->name('yearexam');
@@ -142,9 +171,19 @@ Route::group([
     Route::get('import-label-subject/{id}', [ImportLabalController::class, 'LabelSubject'])->name('label.subject');
     Route::post('import-label-subject', [ImportLabalController::class, 'LabelSubjectTopic'])->name('label.subject.topic');
     Route::post('/questions/update-topics', [ImportLabalController::class, 'storeTopics'])->name('updateTopics');
+    //single topic update
+    Route::get('import-label-subject-single/{id}', [ImportLabalController::class, 'LabelSubjectSingle'])->name('label.subject.single');
+   Route::post('/questions/update-topics-single', [ImportLabalController::class, 'storeTopicsSingle'])->name('updateTopicsSingle');
     //model test add question
     Route::get('/model-test/{id}/add-questions', [ModelTestController::class, 'showAddQuestionsForm'])->name('model-test.add-questions.form');
     Route::post('/model-test/{id}/add-questions', [ModelTestController::class, 'addQuestions'])->name('model-test.add-questions');
+
+     //model test add question custom
+    Route::get('/model-test-custom/{id}/add-questions-custom', [ModelTestController::class, 'showAddQuestionsFormcustom'])->name('model-test.add-questions.form.custom');
+    Route::post('/model-test-custom/{id}/add-questions-custom', [ModelTestController::class, 'addQuestionscustom'])->name('model-test.add-questions.custom');
+    Route::get('/get-questions-by-level/{import_id}', [ModelTestController::class, 'getQuestionsByLevel']);
+
+
     // Additional Routes for AJAX Requests
     Route::get('/get-topics/{subjectId}', [AjaxController::class, 'getTopics'])->name('getTopics');
     Route::get('/get-questions/{topicId}', [AjaxController::class, 'getQuestions'])->name('get-questions');
@@ -160,6 +199,8 @@ Route::group([
 
     Route::put('/questions/bulk-update/update', [QuestionController::class, 'bulkUpdate'])->name('questions.bulkUpdate.update');
   
+
+    Route::get('/{q_slug}', [QuestionController::class, 'singleQuestions'])->name('single.questions');
 
 });
 

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('admin.model-test.add-questions.form.custom',$modelTest->id) }}">Custom Question Add Question</a>
     <h2>Add Questions to Model Test: {{ $modelTest->title }}</h2>
     <p>Number of Questions: {{ $questionCount }}</p>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Fackuser;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\Importable;
 
@@ -16,7 +17,8 @@ class FackuserController extends Controller
 
     public function fackusershowImportForm()
     {
-        return view('backend.fackuser.index');
+        $users=User::all();
+        return view('backend.fackuser.index',compact('users'));
     }
 
     public function fackuserimport(Request $request)

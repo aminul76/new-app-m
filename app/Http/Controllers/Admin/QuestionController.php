@@ -51,6 +51,8 @@ class QuestionController extends Controller
         return view('backend.questions.search', compact('questions', 'subjects', 'topics'));
     }
 
+
+
     public function bulkUpdate(Request $request)
     {
       
@@ -73,6 +75,24 @@ class QuestionController extends Controller
         // Redirect back with success message
         return redirect()->route('admin.questions.index')->with('success', 'Questions updated successfully!');
     }
+
+    public function singleQuestions($q_slug)
+    {
+    
+    
+ 
+     $question = Question::where('q_slug', $q_slug)
+             ->with('options')
+             ->first(); 
+ 
+      
+             if (!$question) {
+                 return abort(404); // or use redirect()->route('your.not.found.page');
+             }
+     
+        return view('backend.questions.single', compact('question'));
+    }
+ 
 
     // Show the form for creating a new question.
     public function create()

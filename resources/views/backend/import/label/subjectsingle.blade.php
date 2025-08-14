@@ -29,6 +29,7 @@
 @section('content')
 
 <h1>Questions List</h1>
+<p>প্রথমটির যে টপিক এডড হয়। সব গুলোর সেটি হবে ।   <p>
 <div class="container">
     <h1>
         @if ($topicStatus==1)
@@ -38,7 +39,7 @@
     @endif</h1>
 
     @if($questions->isNotEmpty())
-        <form action="{{ route('admin.updateTopics') }}" method="POST">
+        <form action="{{ route('admin.updateTopicsSingle') }}" method="POST">
 
             {{-- {{ route('updateTopics') }} --}}
             @csrf
@@ -62,8 +63,8 @@
                             <br>
                              @php
     // Ensure $firstOption->topic_id is an array
-    $topicIds = is_array($firstOption->topic_id) ? $firstOption->topic_id : explode(',', $firstOption->topic_id);
-@endphp
+                             $topicIds = is_array($firstOption->topic_id) ? $firstOption->topic_id : explode(',', $firstOption->topic_id);
+                            @endphp
                               
                               
                             <!--  @foreach ($topics as $topic)-->
@@ -78,7 +79,7 @@
                             <td>{!! $groupedOptions->first()->p_title !!}{!! $groupedOptions->first()->is_correct !!}</td>
                             <td>
                                 <select name="topics[{{ $questionId }}]" >
-                                    <option value="">Select a topic</option>
+                                    <!-- <option value="">Select a topic</option> -->
                                     @foreach ($topics as $topic)
                                         <option value="{{ $topic->id }}"
                                           {{ in_array($topic->id, $topicIds) ? 'selected' : '' }}>

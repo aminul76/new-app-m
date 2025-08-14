@@ -22,7 +22,8 @@
                     <td>{{ $label->i_title }}</td>
                     <td>{{ optional($label->questions->first())->topic_id }}</td>
                     <td>
-                        <a href="{{ route('admin.label.subject', $label->id) }}">Edit</a>
+                        <a href="{{ route('admin.label.subject', $label->id) }}">TopicAdds</a>
+                         <a href="{{ route('admin.label.subject.single', $label->id) }}">SameTopicAdds</a>
                         <form action="{{ route('admin.import-label.destroy', $label->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')

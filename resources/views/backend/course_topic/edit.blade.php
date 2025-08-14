@@ -12,7 +12,7 @@
         </div>
         <div>
             <label for="topics">topics:</label>
-            <select name="topics[]" multiple required>
+            <select name="topics[]" multiple size="18" required>
                 @foreach($topics as $topic)
                     <option value="{{ $topic->id }}"
                         @if(in_array($topic->id, $course->topics->pluck('id')->toArray())) selected @endif>

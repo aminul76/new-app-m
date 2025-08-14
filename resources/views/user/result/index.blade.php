@@ -51,7 +51,7 @@
                      <p>Correct Answers Count: {{ $record->correct_answers_count }}</p>
             <p>Incorrect Answers Count: {{ $record->incorrect_answers_count }}</p>
                      <div class="button-container-result ">
-                        <a href="{{ route('author.mode-text.exam', [$course->c_slug, $record->modelTest->id]) }}" class="btn-result anware">উত্তরপত্র</a>
+                        <a href="{{ route('author.mode-text.resultlist', [$course->c_slug, $record->modelTest->id]) }}" class="btn-result anware">উত্তরপত্র</a>
                         <a href="{{ route('author.merit-list', [$course->c_slug, $record->modelTest->id]) }}" class="btn-result mark">মেধাতালিকা</a>
                     </div>
             </div>
