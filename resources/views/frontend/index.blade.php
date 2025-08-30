@@ -58,6 +58,23 @@
         </div>
 
 
+        <h4> ব্লগ</h4>
+    <div class="subject-icons-section">
+
+
+        @forelse ($posts as $post)
+        <a href="#" class="subject-icon-card">
+           
+            <p>{{ $post->title }}</p>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    @empty
+        <p>No Posts available.</p>
+    @endforelse
+
+    </div>
+
+
 
 
 

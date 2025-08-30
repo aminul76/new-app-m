@@ -25,6 +25,7 @@ use App\Http\Controllers\Author\AuthorModeltest;
 use App\Http\Controllers\Author\ResultController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\Admin\PostController;
 
 use App\Http\Controllers\Author\SubcribeController;
 
@@ -44,10 +45,11 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/courses/{slug}', [FrontendController::class, 'courses'])->name('courses.index');
 
 Route::get('/{q_slug}', [FrontendController::class, 'singleQuestions'])->name('single.questions');
+Route::get('/blog/{slug}', [FrontendController::class, 'singlePost'])->name('single.post');
 
 Route::get('/courses/{courseSlug}/{subjectSlug}', [FrontendController::class, 'topic'])->name('courses.topic');
 
-
+Route::get('/topic/{course_id}/{slug}/detalis', [FrontendController::class, 'topicDetalis'])->name('topics.detalis');
 
 Route::get('/topics/{course_id}/{topic_id}/questions', [FrontendController::class, 'showQuestions'])->name('topics.questions');
 
@@ -94,6 +96,7 @@ Route::get('author/mode-text/{course_slug}/{modeltest_id}/resultlist', [AuthorMo
 
 
 Route::get('author/mode-text/{course_slug}/{modeltest_id}/free', [AuthorModeltest::class, 'examFree'])->name('author.mode-text.free');
+ Route::post('author/mode-text/{course_slug}/{modeltest_id}/freeexam', [AuthorModeltest::class, 'freeExam'])->name('author.mode-text.freeexam');
 
 
 
@@ -103,7 +106,6 @@ Route::get('author/merit-list/{course_slug}/{modeltest_id}', [ResultController::
 Route::get('/author/subcribe/view/{id}', [SubcribeController::class, 'subcribe']);
 Route::get('/author/subcribe/tnxid/{id}', [SubcribeController::class, 'tnxid']);
 Route::post('/author/payment/store', [SubcribeController::class, 'payment'])->name('author.payment.store');
-
 
 
 
@@ -149,6 +151,9 @@ Route::group([
     Route::resource('course-subscribes', CourseSubscribeController::class);
 
     Route::resource('videos', VideoController::class);
+
+     Route::resource('posts', PostController::class);
+     
 
     Route::get('/videosday/editall/{id}', [VideoController::class, 'editAll'])->name('admin.videos.editall');
     Route::post('/videos/update-all', [VideoController::class, 'updateAll'])->name('videos.update_all');
@@ -201,6 +206,13 @@ Route::group([
   
 
     Route::get('/{q_slug}', [QuestionController::class, 'singleQuestions'])->name('single.questions');
+    //মডেল টেস্ট 
+    Route::get('modeltest/marksheet/{id}', 'ModelTestController@marksheet')->name('modeltest.marksheet');
+
+     Route::get('modeltest/allquestion/{id}', 'ModelTestController@allquestion')->name('modeltest.allquestion');
+
+    Route::delete('/modeltest/dquestions/{id}', [ModelTestController::class, 'dquestions'])->name('dquestions.destroy');
+
 
 });
 

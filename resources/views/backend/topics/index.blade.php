@@ -25,11 +25,17 @@
                     <td>{{ $topic->subject->s_title }}</td>
                     <td>
                         <a href="{{ route('admin.topics.edit', $topic->id) }}">Edit</a>
-                        <form action="{{ route('admin.topics.destroy', $topic->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.topics.destroy', $topic->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this topices?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach

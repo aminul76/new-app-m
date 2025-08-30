@@ -23,6 +23,9 @@
    
    <!-- Title -->
    <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
+
+
+   
 @endsection
 @section('style')
 @endsection

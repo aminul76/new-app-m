@@ -27,6 +27,27 @@
                 </option>
             @endforeach
         </select>
+
+        <label for="details">Details:</label>
+        <textarea name="details" id="details" class="form-control">{{ $topic->details }}</textarea>
+
         <button type="submit">Update</button>
     </form>
+@endsection
+
+@section('pagescripts')
+    {{-- Summernote CSS & JS --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#details').summernote({
+                placeholder: 'Enter details here...',
+                tabsize: 2,
+                height: 200
+            });
+        });
+    </script>
 @endsection

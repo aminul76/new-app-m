@@ -11,9 +11,7 @@
                 <th>ID</th>
 
                 <th>Title</th>
-                <th>Ques</th>
-                <th>Course</th>
-                <th>date</th>
+                <th>Actions</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,14 +19,15 @@
             @foreach ($modelTests as $modelTest)
                 <tr>
                     <td>{{ $modelTest->id }}</td>
-                    <td>{{ $modelTest->title }}</td>
-                    <td>{{ optional($modelTest->modelTestQuestions->first())->question_id }}</td>
-                 <td>{{ $modelTest->start_date }}</td>
-                    <td>{{ $modelTest->course->c_title }}</td>
+                    <td> <a href="{{ route('admin.modeltest.marksheet', $modelTest->id) }}">{{ $modelTest->slug }}</a></td>
+                  
+              
                     <td>
-                        <a href="{{ route('admin.model-test.add-questions.form',$modelTest->id) }}">Add Question</a>
+                        <a href="{{ route('admin.model-test.add-questions.form',$modelTest->id) }}">AddQ</a>
                 <a href="{{ route('admin.model_tests.edit', $modelTest->id) }}">Edit</a>
                 <a href="{{ url('admin/modeltest/editall', $modelTest->id) }}">day</a>
+                    </td>
+                    <td>
                 <form action="{{ route('admin.model_tests.destroy', $modelTest->id) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')

@@ -42,6 +42,7 @@
 
         <div>
             <label for="status">Status</label>
+            <p>স্টাটাস 1 দিলে ডেইলিতে সো করবে । 2 দিলে সো করবে না। 3 দিলে free exam হবে  পপ আপে ডেটা দিবে। তা সেভ হবে। 4 দিলে ফ্রি এক্সাম হবে । 5 হলে পেইড পরিক্ষা একবার দিতে পারবে  </p>
             <input type="number" name="status" id="status" value="{{ old('status', $modelTest->status) }}">
         </div>
         <div>

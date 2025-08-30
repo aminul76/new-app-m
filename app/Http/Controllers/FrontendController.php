@@ -9,6 +9,7 @@ use App\Models\Topic;
 use App\Models\Subject;
 use App\Models\Question;
 use App\Models\Setting;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CourseSubscribe;
 use Carbon\Carbon;
@@ -21,7 +22,8 @@ class FrontendController extends Controller
 
     $courses = Course::all();
     $settings = Setting::first();
-    return view('frontend.index',compact('courses','settings'));
+     $posts = Post::latest()->take(9)->get();
+    return view('frontend.index',compact('courses','settings','posts'));
 
    }
    public function courses($slug)
@@ -52,6 +54,26 @@ class FrontendController extends Controller
     return view('frontend.course', ['course' => $course, 'subjects' => $subjects,'modelTest' => $modelTest]);
 
    }
+
+
+   public function topicDetalis($course_id, $slug)
+   {
+
+    $course = Course::where('id', $course_id)->first();
+    $topic = Topic::where('t_slug', $slug)->first();
+    $subject = Subject::where('id', $topic->subject_id)->first();
+    
+    return view('frontend.topic_detalis', compact('topic','course','subject'));
+
+   }
+
+
+
+
+
+
+
+
 
    public function topic($courseSlug, $subjectSlug)
    {
@@ -165,7 +187,7 @@ class FrontendController extends Controller
      
            
     
-       return view('frontend.topic_question', compact('questions','course','subject'));
+       return view('frontend.topic_question', compact('questions','course','subject','topic'));
    }
 
 
@@ -184,6 +206,25 @@ class FrontendController extends Controller
             }
     
        return view('frontend.single_question', compact('question'));
+   }
+
+
+
+
+    public function singlePost($slug)
+   {
+    $user = Auth::user();
+   
+
+    $post= Post::where('slug', $slug)
+            ->first(); 
+
+     
+            if (!$post) {
+                return abort(404); // or use redirect()->route('your.not.found.page');
+            }
+    
+       return view('frontend.singlepost', compact('post'));
    }
 
 

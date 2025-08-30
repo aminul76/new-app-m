@@ -26,9 +26,11 @@
    <link rel="icon" href="{{ asset('images/courseimage/' . $course->c_image) }}" type="image/x-icon">
    
    <!-- Title -->
+    
    <title>{{ $course->c_seo_title ?? $course->c_title }}</title>  
 @endsection
 @section('style')
+
 @endsection
 @section('content')
 @include('frontend.include.header')
@@ -196,7 +198,20 @@
 
 
     <!-- Social Media Cards -->
-    <div class="social-media-cards">
+   
+
+
+   
+
+
+   <div class="descrip-card">
+       
+       <p>{!! $course->c_subcribe_details !!}</p>
+    </div>
+
+
+
+     <div class="social-media-cards">
         <div class="social-media-card facebook-card">
             <div class="social-media-icon"><i class="fab fa-facebook-f"></i></div>
             <div class="social-media-content">
@@ -213,8 +228,6 @@
             <a href="#" class="social-media-btn">Join Now</a>
         </div>
     </div>
-
-
 
 
     <!-- Subscription Section -->

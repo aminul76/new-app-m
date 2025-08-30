@@ -52,6 +52,16 @@
             </ul>
         </li>
 
+           <li>
+            <a href="">Post</a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin.posts.index') }}">Post</a></li>
+
+
+            </ul>
+        </li>
+
+
 
 
 

@@ -14,6 +14,7 @@ use App\Models\UserModelAnswer;
 use App\Models\UserExamRecord;
 use App\Models\Answer;
 use App\Models\Video;
+use App\Models\FreeExamStore;
 use App\Models\CourseSubscribe;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -261,8 +262,11 @@ class AuthorModeltest extends Controller
         ->where('modeltest_id', $modeltest_id)
         ->pluck('selected_option_id', 'question_id')
         ->toArray();
-
-        // If user has already submitted answers, redirect to results page
+       
+         if ($modelTest->status==5) {
+            # code...
+        
+        //If user has already submitted answers, redirect to results page
         if (!empty($userAnswers)) {
         $correctAnswers = [];
         foreach ($modelTest->modelTestQuestions as $modelTestQuestion) {
@@ -319,8 +323,8 @@ class AuthorModeltest extends Controller
         'totals'=>$totals,
         'dateBangla'=> $dateBangla
         ]);
-    }
-
+        }
+        }
 
 
 
@@ -652,31 +656,38 @@ class AuthorModeltest extends Controller
     
         $user = Auth::user();
 
-        if (!$user) {
-            return view('user.profile.index', ['course' => $course,]);
-        }
+        // if (!$user) {
+        //     return view('user.profile.index', ['course' => $course,]);
+        // }
 
-        $subscription = CourseSubscribe::where('user_id', $user->id)
-        ->where('course_id', $course->id)
-        ->where(function ($query) {
-            $query->whereNull('expires_at')
-                  ->orWhere('expires_at', '>=', Carbon::now());
-        })
-        ->first();
+        // $subscription = CourseSubscribe::where('user_id', $user->id)
+        // ->where('course_id', $course->id)
+        // ->where(function ($query) {
+        //     $query->whereNull('expires_at')
+        //           ->orWhere('expires_at', '>=', Carbon::now());
+        // })
+        // ->first();
     
-            // If no active subscription, show an error or redirect
-        if (!$subscription) {
-            return view('user.subcribe.subcribe', ['course' => $course,]);
-        }
+        //     // If no active subscription, show an error or redirect
+        // if (!$subscription) {
+        //     return view('user.subcribe.subcribe', ['course' => $course,]);
+        // }
         
         // Check if the user is authenticated
        
     
-        $modelTest = ModelTest::with('questions.question.options')->where('status',2)->findOrFail($modeltest_id);
+        $modelTest = ModelTest::with('questions.question.options')
+        ->where(function($query) {
+        $query->where('status', 3)
+              ->orWhere('status', 4);
+        })
+        ->where('end_date', '>=', Carbon::now())
+        ->find($modeltest_id);
         
-    
-    
-       
+        if (!$modelTest) {
+           return view('frontend.course', ['course' => $course,]);
+        }
+            
     
     
             //end subcribe
@@ -692,7 +703,7 @@ class AuthorModeltest extends Controller
     
     
     
-        return view('user.modeltest.exam', compact('modelTest','course','course_slug'));
+        return view('user.modeltest.freeexam', compact('modelTest','course','course_slug'));
     }
 
 
@@ -732,7 +743,139 @@ class AuthorModeltest extends Controller
     }
     
 
+    public function freeExam(Request $request, $course_slug, $modeltest_id)
+{
+    // রিকোয়েস্ট ভ্যালিডেশন
+    $validated = $request->validate([
+        'answers' => 'required|array',
+        'answers.*' => 'exists:options,id'
+    ]);
+
+
+   
+   
+    //$user = Auth::user();
+    $course = Course::where('c_slug', $course_slug)->first();
+
+    // if (!$user) {
+    //     return view('frontend.course', ['course' => $course]);
+    // }
+
+    // মডেল টেস্ট এবং সম্পর্কিত প্রশ্নগুলি আনুন
+    $modelTest = ModelTest::with('modelTestQuestions.question.options')->findOrFail($modeltest_id);
+    $userAnswers = $request->input('answers');
+
+    // ডেটা DB-তে সেভ হবে না, কেবল হিসাব করা হবে
+    $correctAnswerCount = 0;
+    $incorrectAnswerCount = 0;
+
+    foreach ($userAnswers as $questionId => $selectedOptionId) {
+        $question = Question::with('options')->findOrFail($questionId);
+        $correctOption = $question->options->where('is_correct', true)->first();
+
+        if ($correctOption) {
+            if ($selectedOptionId == $correctOption->id) {
+                $correctAnswerCount++;
+            } else {
+                $incorrectAnswerCount++;
+            }
+        }
+    }
+
+    if ($modelTest->status==3) {
+        # code...
     
+ 
+      $userName = $request->input('user_name');
+     $userPhone = $request->input('user_phone');
+      $ipAddress = $request->ip();
+    $mobileIp = $request->header('X-Forwarded-For') ?? $ipAddress;
+
+       // চেক করা হচ্ছে একই ip_address, modeltest_id, mobile_ip এর ডেটা আগে আছে কিনা
+     $exists = FreeExamStore::where('ip_address', $ipAddress)
+                ->where('modeltest_id', $modeltest_id)
+                ->where('mobile_ip', $mobileIp)
+                ->exists();
+    // যদি ডাটা সংরক্ষন করা লাগে  সংরক্ষণ করুন
+     if (!$exists) {
+        FreeExamStore::updateOrCreate(
+            [
+                'user_name' => $userName,
+                'user_phone' => $userPhone,
+                'modeltest_id' => $modeltest_id,
+            ],
+            [
+                'ip_address' => $request->ip(),
+                'mobile_ip' => $request->header('X-Forwarded-For') ?? $request->ip(),
+                'correct_answers_count' => $correctAnswerCount,
+                'incorrect_answers_count' => $incorrectAnswerCount,
+                'modeltest_count' => $modelTest->mark,
+            ]
+        );
+        }
+    }
+
+    // সঠিক উত্তরের জন্য ডেটা প্রস্তুত করুন
+    $correctAnswers = [];
+    $subjectsData = [];
+
+    foreach ($modelTest->modelTestQuestions as $modelTestQuestion) {
+        $question = $modelTestQuestion->question;
+        $correctOption = $question->options->where('is_correct', true)->first();
+
+        if ($correctOption) {
+            $correctAnswers[$question->id] = $correctOption->p_title;
+        }
+
+        $selectedOptionId = $userAnswers[$question->id] ?? null;
+        $selectedOption = $question->options->where('id', $selectedOptionId)->first();
+
+        $subjectId = $question->subject_id;
+        $subjectTitle = $question->subject->s_title ?? 'Unknown';
+
+        if (!isset($subjectsData[$subjectId])) {
+            $subjectsData[$subjectId] = [
+                'subject_name' => $subjectTitle,
+                'right_answers' => 0,
+                'wrong_answers' => 0,
+            ];
+        }
+
+        if ($selectedOption) {
+            if ($selectedOption->is_correct) {
+                $subjectsData[$subjectId]['right_answers']++;
+            } else {
+                $subjectsData[$subjectId]['wrong_answers']++;
+            }
+        }
+    }
+
+    // টোটাল হিসাব
+    $totals = (object) [
+        'total_right_answers' => $correctAnswerCount,
+        'total_wrong_answers' => $incorrectAnswerCount,
+        'total_users' => 1 // স্ট্যাটিক বা ডামি ভ্যালু, কারণ DB-তে সেভ হচ্ছে না
+    ];
+
+    // ডেট তৈরি করুন
+    $currentDate = now();
+    $formattedDate = $currentDate->format('j F Y');
+    $formattedDate = DateHelper::toBengaliNumerals($formattedDate);
+    $month = $currentDate->format('F');
+    $dateBangla = str_replace($month, DateHelper::toBengaliMonth($month), $formattedDate);
+
+    return view('user.modeltest.freeresults', [
+        'modelTest' => $modelTest,
+        'userAnswers' => $userAnswers,
+        'correctAnswers' => $correctAnswers,
+        'course' => $course,
+        'subjects' => collect($subjectsData),
+        'totals' => $totals,
+        'dateBangla' => $dateBangla,
+    ]);
+}
+
+
 
 
 

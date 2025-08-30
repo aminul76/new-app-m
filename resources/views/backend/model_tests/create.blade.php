@@ -22,6 +22,7 @@
         </div>
         <div>
             <label for="status">Status</label>
+            <p>স্টাটাস 1 দিলে ডেইলিতে সো করবে । 2 দিলে সো করবে না। 3 দিলে free exam হবে</p>
             <input type="number" name="status" id="status" value="{{ old('status') }}">
         </div>
         <div class="form-group">

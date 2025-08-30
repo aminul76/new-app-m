@@ -32,11 +32,17 @@
                 <td class="border px-4 py-2">{{ $subscription->status == 1 ? 'Active' : 'Deactivated' }}</td>
                 <td class="border px-4 py-2">
                     <a href="{{ route('admin.course-subscribes.edit', $subscription->id) }}" class="text-blue-500">Edit</a>
-                    <form action="{{ route('admin.course-subscribes.destroy', $subscription->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.course-subscribes.destroy', $subscription->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500" onclick="return confirm('Are you sure you want to delete this subscription?')">Delete</button>
+                        <button type="submit">Delete</button>
                     </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this course subcribes?');
+                    }
+                    </script>
                 </td>
             </tr>
         @endforeach

@@ -27,13 +27,17 @@
 
                     {{-- <a href="{{ route('admin.videos.edit-all', $video->id) }}">day</a> --}}
                     <a href="{{ route('admin.videos.edit', $video->id) }}">Edit</a>
-                    <form action="{{ route('admin.videos.destroy', $video->id) }}" method="POST">
+                    <form action="{{ route('admin.videos.destroy', $video->id) }}" method="POST" onsubmit="return confirmDelete();">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Delete</button>
                     </form>
 
-                    
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this video?');
+                    }
+                    </script>
 
                 </td>
             </tr>

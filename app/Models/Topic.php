@@ -10,7 +10,7 @@ class Topic extends Model
     use HasFactory;
 
 
-    protected $fillable = ['subject_id', 't_title', 't_slug'];
+    protected $fillable = ['subject_id', 't_title', 't_slug','details'];
 
     public function subject()
     {

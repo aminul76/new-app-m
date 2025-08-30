@@ -13,6 +13,7 @@
      <script type="text/javascript" charset="utf8" src="{{ asset('plugins/jquery.dataTables.min.js') }}"></script>
      <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
      </script> 
+      @yield('style')
     </head>
 <body>
     @include('backend.include.sidebar')
@@ -23,11 +24,14 @@
         @yield('content')
     </div>
 
-
+ @yield('pagescripts')
   <script>
     $(document).ready(function() {
         $('#dTable').DataTable();
     });
+    
+    
 </script>
+
 </body>
 </html>

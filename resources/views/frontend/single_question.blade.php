@@ -24,6 +24,8 @@
    <!-- Favicon (Optional) -->
    
    <!-- Title -->
+
+  
    <title>{{ $question->q_title}}</title>  
 @endsection 
 
@@ -238,6 +240,26 @@ nav[role="navigation"] {
 .hidden {
     display: none;
 }
+.option .icon {
+  
+    float: right;
+    font-size: 18px;
+    display: none;
+}
+
+.option.correct .icon {
+    border-radius:50px;
+    background:green;
+    display: inline;
+    color: green;
+    content: "✔️";
+}
+
+.option.incorrect .icon {
+    display: inline;
+    color: green;
+    content: "❌";
+}
 
 /* Styles that should apply for screens larger than 640px (sm breakpoint) */
 @media (min-width: 640px) {
@@ -293,11 +315,12 @@ nav[role="navigation"] {
                         data-is-correct="{{ $option->is_correct }}"
                         onclick="handleOptionClick(this, {{ $question->id }}, {{ $option->is_correct }})">
                         {!! $option->p_title !!}
+                         <span class="icon"></span> <!-- Add this line -->
                     </div>
                 @endforeach
             </div>
             @if ($question->q_explain!=null)
-            <span class="explanation">ব্যাখা:{{ $question->q_explain }}</span>
+            <span class="explanation">ব্যাখা:{!! $question->q_explain !!}</span>
             @endif
               
             <!-- Display exam and year information -->
@@ -326,19 +349,24 @@ nav[role="navigation"] {
         // Clear previous selections
         options.forEach(opt => {
             opt.classList.remove('correct', 'incorrect');
+             const icon = opt.querySelector('.icon');
+            if (icon) icon.innerHTML = '';
         });
 
         // Set current option style
         if (isCorrect) {
             element.classList.add('correct');
+             element.querySelector('.icon').innerHTML = '✔️'; // Tick icon
         } else {
             element.classList.add('incorrect');
+             element.querySelector('.icon').innerHTML = '❌'; // Optional cross icon
         }
 
         // Highlight the correct option within the question
         const correctOptions = questionElement.querySelectorAll('.option[data-is-correct="1"]');
         correctOptions.forEach(opt => {
             opt.classList.add('correct');
+            opt.querySelector('.icon').innerHTML = '✔️';
         });
 
         // Show explanation

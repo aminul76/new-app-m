@@ -24,11 +24,17 @@
                     <td>{{ $exam->e_slug }}</td>
                     <td>
                         <a href="{{ route('admin.exams.edit', $exam->id) }}">Edit</a>
-                        <form action="{{ route('admin.exams.destroy', $exam->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.exams.destroy', $exam->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this exam?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach

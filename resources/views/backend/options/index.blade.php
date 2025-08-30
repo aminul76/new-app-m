@@ -25,11 +25,17 @@
                     <td>{{ $option->is_correct == 1 ? 'Yes' : 'No' }}</td>
                     <td>
                         <a href="{{ route('admin.options.edit', $option->id) }}">Edit</a>
-                        <form action="{{ route('admin.options.destroy', $option->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.options.destroy', $option->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this option?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach

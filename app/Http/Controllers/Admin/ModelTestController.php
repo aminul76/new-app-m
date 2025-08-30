@@ -10,6 +10,8 @@ use App\Models\Subject;
 use App\Models\Question;
 use App\Models\Import;
 use App\Models\ModelTestQuestion;
+use App\Models\UserExamRecord;
+use App\Models\FreeExamStore;
 use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
@@ -263,5 +265,36 @@ class ModelTestController extends Controller
     return redirect()->route('admin.model_tests.index')->with('success', 'All video start dates have been updated.');
    }
 
+
+
+       public function marksheet($id)
+        {
+            $records1 = UserExamRecord::with('user')->where('modeltest_id', $id)->get();
+            $records2 = FreeExamStore::where('modeltest_id', $id)->get();
+
+            // দুই collection merge
+            $mergedRecords = $records1->concat($records2);
+
+            return view('backend.model_tests.exam_marksheet', compact('mergedRecords'));
+        }
+
+
+        
+       public function allquestion($id)
+        {
+          
+            $allquestions = ModelTestQuestion::where('model_test_id', $id)->get();
+            return view('backend.model_tests.allquestion', compact('allquestions'));
+        }
+
+
+          public function dquestions($id)
+            {
+               
+                $question = ModelTestQuestion::findOrFail($id);
+                $question->delete();
+
+                return redirect()->back()->with('success', 'Question deleted successfully.');
+            }
 
 }

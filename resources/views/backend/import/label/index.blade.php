@@ -24,11 +24,17 @@
                     <td>
                         <a href="{{ route('admin.label.subject', $label->id) }}">TopicAdds</a>
                          <a href="{{ route('admin.label.subject.single', $label->id) }}">SameTopicAdds</a>
-                        <form action="{{ route('admin.import-label.destroy', $label->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.import-label.destroy', $label->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this lebel?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach

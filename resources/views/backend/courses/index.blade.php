@@ -23,11 +23,17 @@
                     <td>{{ $course->c_slug }}</td>
                     <td>
                         <a href="{{ route('admin.courses.edit', $course->id) }}">Edit</a>
-                        <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.courses.destroy', $course->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this course?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach

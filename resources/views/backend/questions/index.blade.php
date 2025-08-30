@@ -36,11 +36,17 @@
                     <td>{{ $question->topic->t_title ?? 'N/A' }}</td>
                     <td>
                         <a href="{{ route('admin.questions.edit', $question->id) }}">Edit</a>
-                        <form action="{{ route('admin.questions.destroy', $question->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this question?')">Delete</button>
-                        </form>
+                        <form action="{{ route('admin.questions.destroy', $question->id) }}" method="POST" style="display:inline;"onsubmit="return confirmDelete();">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <script>
+                    function confirmDelete() {
+                        return confirm('Are you sure you want to delete this video?');
+                    }
+                    </script>
                     </td>
                 </tr>
             @endforeach
